@@ -111,6 +111,12 @@ export default {
         '/models/config/status': async () => {
             // 返回配置状态信息
             return modelConfigService.getStatus();
+        },
+
+        '/sites': async () => {
+            // 返回完整的站点配置（包含 model_list，供前端直接使用）
+            const sites = modelConfigService.getAllSiteConfigs();
+            return { sites };
         }
     },
 

@@ -835,6 +835,93 @@ class ModelConfigService {
       configFilePath: CONFIG_FILE_PATH,
     };
   }
+
+  /**
+   * 获取所有站点的完整配置（供前端直接使用）
+   * 返回格式兼容前端期望的 ApiSiteConfig[]
+   */
+  getAllSiteConfigs(): Array<{
+    code: string;
+    name: string;
+    description: string;
+    home_url: string;
+    model_list: Array<{
+      model_name: string;
+      model_req_key: string;
+      model_id: string;
+      model_tip?: string;
+      icon_url?: string;
+      is_new_model?: boolean;
+      resolution_map?: Record<string, {
+        resolution_name?: string;
+        image_ratio_sizes?: Array<{ ratio_type: number; width: number; height: number }>;
+      }>;
+    }>;
+    default_model_index: number;
+  }> {
+    const sites: SiteType[] = ["china", "US", "HK", "JP", "SG"];
+    const result = [];
+
+    for (const site of sites) {
+      const config = this.siteConfigs[site];
+      const siteApiConfig = SITE_API_CONFIGS[site];
+
+      if (!config) continue;
+
+      // 构建 model_list，添加 model_id 字段
+      const modelList = config.modelList.map(model => {
+        const modelId = this.modelReqKeyToId(model.model_req_key, model.model_name);
+        return {
+          model_name: model.model_name,
+          model_req_key: model.model_req_key,
+          model_id: modelId,
+          model_tip: model.model_tip,
+          icon_url: model.icon_url,
+          is_new_model: model.is_new_model,
+          resolution_map: model.resolution_map,
+        };
+      });
+
+      result.push({
+        code: site === "china" ? "china" : site.toLowerCase(),
+        name: siteApiConfig.name,
+        description: this.getSiteDescription(site),
+        home_url: this.getSiteHomeUrl(site),
+        model_list: modelList,
+        default_model_index: config.defaultModelIndex,
+      });
+    }
+
+    return result;
+  }
+
+  /**
+   * 获取站点描述
+   */
+  private getSiteDescription(site: SiteType): string {
+    const descriptions: Record<SiteType, string> = {
+      china: "即梦AI中国站，需要国内网络访问",
+      US: "Dreamina 国际站（美国），需要国际网络访问",
+      HK: "Dreamina 国际站（香港），需要国际网络访问",
+      JP: "Dreamina 国际站（日本），需要国际网络访问",
+      SG: "Dreamina 国际站（新加坡），需要国际网络访问",
+    };
+    return descriptions[site];
+  }
+
+  /**
+   * 获取站点首页 URL
+   */
+  private getSiteHomeUrl(site: SiteType): string {
+    const urls: Record<SiteType, string> = {
+      china: "https://jimeng.jianying.com/ai-tool/home",
+      US: "https://dreamina.capcut.com/",
+      HK: "https://dreamina.capcut.com/",
+      JP: "https://dreamina.capcut.com/",
+      SG: "https://dreamina.capcut.com/",
+    };
+    return urls[site];
+  }
 }
 
 // 导出单例

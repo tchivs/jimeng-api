@@ -59,9 +59,9 @@ curl -X POST http://localhost:5100/v1/images/generations \
 >
 > **注意2**: 国内站和国际站现已同时支持*文生图*和*图生图*，国际站添加nanobanana和nanobananapro模型。
 >
-> **注意3**: 国际站使用nanobanana模型时的分辨率规则:
-> - **美国站 (us-)**: 生成的图像固定为 **1024x1024** 和 **2k** 清晰度，忽略用户传入的 ratio 和 resolution 参数
-> - **香港/日本/新加坡站 (hk-/jp-/sg-)**: 强制使用 **1k** 清晰度，但支持自定义 ratio 参数（如 16:9、4:3 等）
+> **注意3**: 国际站 nanobanana 模型的分辨率规则（根据配置文件动态加载）:
+> - **Nano Banana**: 仅支持 **1k** 分辨率，支持自定义 ratio（如 1:1、16:9、4:3 等）
+> - **Nano Banana Pro**: 支持 **2k** 和 **4k** 分辨率，支持自定义 ratio
 
 ![](https://github.com/iptag/jimeng-api/blob/main/get_sessionid.png)
 
@@ -261,15 +261,14 @@ curl -X POST http://localhost:5100/v1/images/generations \
   }'
 ```
 
-**支持的模型**:
-- `nanobananapro`: 仅国际站支持，支持`ratio` 和`resolution`参数
-- `nanobanana`: 仅国际站支持
-- `jimeng-4.1`: 仅国内站支持，支持 2k/4k 全部 ratio 及 intelligent_ratio
-- `jimeng-4.0`: 国内、国际站均支持
-- `jimeng-3.1`: 仅国内站支持
-- `jimeng-3.0`: 国内、国际站均支持
-- `jimeng-2.1`: 仅国内站支持
-- `jimeng-xl-pro`
+**支持的模型**（从配置文件动态加载，使用 `/v1/models` 查询最新列表）:
+- `jimeng-4.1`: 国内站和国际站均支持，支持 2k/4k 分辨率
+- `jimeng-4.0`: 国内站和国际站均支持，支持 2k/4k 分辨率
+- `jimeng-3.1`: 仅国内站支持（国际站为 `jimeng-3.1-intl`），支持 1k/2k 分辨率
+- `jimeng-3.0`: 国内站和国际站均支持，支持 1k/2k 分辨率
+- `nanobananapro`: 仅国际站支持，支持 2k/4k 分辨率
+- `nanobanana`: 仅国际站支持，仅支持 1k 分辨率
+- `jimeng-2.0-pro`: 仅国际站支持，仅支持 1k 分辨率
 
 
 **支持的比例及对应分辨率** ：

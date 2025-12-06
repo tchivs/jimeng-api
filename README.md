@@ -57,9 +57,9 @@ curl -X POST http://localhost:5100/v1/images/generations \
 >
 > **Note 2**: Domestic and international sites now support both *text-to-image* and *image-to-image*. The nanobanana and nanobananapro models have been added for the international site.
 >
-> **Note 3**: Resolution rules when using the nanobanana model on international sites:
-> - **US site (us-)**: Images are fixed at **1024x1024** with **2k** resolution, ignoring user-provided ratio and resolution parameters
-> - **Hong Kong/Japan/Singapore sites (hk-/jp-/sg-)**: Fixed **1k** resolution, but supports custom ratio parameters (e.g., 16:9, 4:3, etc.)
+> **Note 3**: Resolution rules for nanobanana models on international sites (loaded dynamically from config):
+> - **Nano Banana**: Only supports **1k** resolution, with custom ratio options (e.g., 1:1, 16:9, 4:3, etc.)
+> - **Nano Banana Pro**: Supports **2k** and **4k** resolutions, with custom ratio options
 
 ![](https://github.com/iptag/jimeng-api/blob/main/get_sessionid.png)
 
@@ -249,15 +249,14 @@ curl -X POST http://localhost:5100/v1/images/generations \
     "{\"model\": \"jimeng-4.0\", \"prompt\": \"A running lion, portrait orientation\", \"resolution\": \"2k\", \"intelligent_ratio\": true}"
 ```
 
-**Supported Models**:
-- `nanobananapro`: Only supported on the international site, supporting `ratio` and `resolution`.
-- `nanobanana`: Only supported on the international site.
-- `jimeng-4.1`: Only supported on the domestic site, supports all 2k/4k ratios and intelligent_ratio.
-- `jimeng-4.0`: Supported on both domestic and international sites.
-- `jimeng-3.1`: Only supported on the domestic site.
-- `jimeng-3.0`: Supported on both domestic and international sites.
-- `jimeng-2.1`: Only supported on the domestic site.
-- `jimeng-xl-pro`
+**Supported Models** (dynamically loaded from config, use `/v1/models` to query the latest list):
+- `jimeng-4.1`: Supported on both domestic and international sites, supports 2k/4k resolutions
+- `jimeng-4.0`: Supported on both domestic and international sites, supports 2k/4k resolutions
+- `jimeng-3.1`: Only supported on domestic site (international: `jimeng-3.1-intl`), supports 1k/2k resolutions
+- `jimeng-3.0`: Supported on both domestic and international sites, supports 1k/2k resolutions
+- `nanobananapro`: Only supported on international sites, supports 2k/4k resolutions
+- `nanobanana`: Only supported on international sites, only supports 1k resolution
+- `jimeng-2.0-pro`: Only supported on international sites, only supports 1k resolution
 
 **Supported Ratios and Corresponding Resolutions**:
 | resolution | ratio | Resolution |

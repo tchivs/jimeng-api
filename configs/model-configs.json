@@ -2,7 +2,7 @@
   "china": {
     "imageModels": [
       {
-        "icon_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/image_41.png~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=BrXBGJw5Ggo9CW1435GCME%2BEdq4%3D",
+        "icon_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/image_41.png~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=sWs%2BP0rcMwkifXCS1W0IgLBlPaI%3D",
         "model_name_starling_key": "web_image_model_name_4_1",
         "model_tip_starling_key": "web_image_model_desc_4_1",
         "model_req_key": "high_aes_general_v41",
@@ -218,7 +218,7 @@
         }
       },
       {
-        "icon_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model4.png~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=QfhI5E5NdUc093e2RBP2%2FWRHpkI%3D",
+        "icon_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model4.png~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=yetZ1c9nbTupScvA4ZtD25JncZo%3D",
         "model_name_starling_key": "dreamina_image4_title",
         "model_tip_starling_key": "dreamina_image4_desc",
         "model_req_key": "high_aes_general_v40",
@@ -433,7 +433,7 @@
         }
       },
       {
-        "icon_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_image_v8_3_1.jpg~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=U%2BTtp4K%2FnFfVMK4ugsscuqDXwQ0%3D",
+        "icon_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_image_v8_3_1.jpg~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=dEtWiyqgoVQnsH%2BjbrAepzAStPo%3D",
         "model_name_starling_key": "dre_t2i_model_3_1",
         "model_tip_starling_key": "dre_t2i_model_3_1_desc",
         "model_req_key": "high_aes_general_v30l_art_fangzhou:general_v3.0_18b",
@@ -636,7 +636,7 @@
         }
       },
       {
-        "icon_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_image_v8_3_0.jpg~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=St6wOrsuSPKyz4BYKReCZlGg6rs%3D",
+        "icon_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_image_v8_3_0.jpg~tplv-tb4s082cfz-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=h8iIS%2B48yOavXRH3kReSBIhwMG0%3D",
         "model_name_starling_key": "dre_t2i_model_3_0",
         "model_tip_starling_key": "dre_t2i_model_3_0_desc",
         "model_req_key": "high_aes_general_v30l:general_v3.0_18b",
@@ -849,7 +849,7 @@
       {
         "icon": {
           "image_uri": "tos-cn-i-tb4s082cfz/model_video_v8_3_0_pro.jpg",
-          "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_video_v8_3_0_pro.jpg~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=1ZYI9tjFVakkGhDraCkeBjrKK7M%3D",
+          "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_video_v8_3_0_pro.jpg~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=4lTp%2FlJRl9PSR4e5r5iMmeg16XY%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -970,7 +970,7 @@
       {
         "icon": {
           "image_uri": "tos-cn-i-tb4s082cfz/video_3_fast.png",
-          "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/video_3_fast.png~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=UTpHK5CKo9kaFk5gkJ6dBP74arw%3D",
+          "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/video_3_fast.png~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=MbrMDwvRfl9w75AsAG9KlOXyHdA%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -1124,7 +1124,7 @@
       {
         "icon": {
           "image_uri": "tos-cn-i-tb4s082cfz/model_video_v8_3_0.jpg",
-          "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_video_v8_3_0.jpg~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=pKy6XNjD7Hu2Hi5J%2BX6meUHgvII%3D",
+          "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/model_video_v8_3_0.jpg~tplv-tb4s082cfz-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=QN3bda%2BRjqpYoh2V646eFInSnOE%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -1146,7 +1146,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/hitchcock_dolly_in_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/hitchcock_dolly_in_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=qZNPacBAJLeDv5fNFROABEh88p8%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/hitchcock_dolly_in_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=qujlYLp7ZLZjQaArprQ%2FRaVT2uI%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1179,7 +1179,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/hitchcock_dolly_out_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/hitchcock_dolly_out_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=bcu9iXCkvImuDmbPK56XQs0KvN4%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/hitchcock_dolly_out_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=2uQwon3aGvKnHCbu4rIH2m15Uog%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1212,7 +1212,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/robo_arm_320p.webp",
-                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/robo_arm_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=7zE%2FijW0tYqiv4kw6pTE7fy06JA%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/robo_arm_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=eNSPkesiiJSf3ZeLF8bChTjbPCk%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1245,7 +1245,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/dynamic_orbit_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/dynamic_orbit_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=pvl0TnT6eBgX8XuIUdFosuZfjjk%3D",
+                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/dynamic_orbit_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=R8sx2QXA0pZmIAByAOfe178bMPY%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1278,7 +1278,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/central_orbit_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/central_orbit_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=nuRedD39DYTpEHDND0ZE%2B7gxQIo%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/central_orbit_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=N462JgGfX3Y7RLXMnqV8lLtoAf4%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1311,7 +1311,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/crane_push_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/crane_push_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=Ovb7IFVc95xbjfPudX2UNyAaeEk%3D",
+                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/crane_push_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=5u2%2FfgFfR3zCIjOKerJahObj9sk%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1344,7 +1344,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/quick_pull_back_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/quick_pull_back_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=R1Fns8dPwXGaWh8CRUBvnDJEflg%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/quick_pull_back_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=9vXgq4VzPrtx50Wy5x4RelXVx9M%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1377,7 +1377,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/counterclockwise_swivel_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/counterclockwise_swivel_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=i%2BQ03o00QvjiTG%2BINI6q%2Ff3jjEs%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/counterclockwise_swivel_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=Kc0ljZRObI09jQYDdk2nRcbc0KM%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1410,7 +1410,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/clockwise_swivel_320p.webp",
-                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/clockwise_swivel_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=OGIufV5fCmK%2FynEP%2F%2BBVASuJcmY%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/clockwise_swivel_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=c9n1YBD%2B40Sp1eqkpqS9vO7D%2FQ4%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1443,7 +1443,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/handheld_320p.webp",
-                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/handheld_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=sNa39cuwS8RYwisSHwdd%2BxCUv9k%3D",
+                    "image_url": "https://p26-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/handheld_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=Tfv8HyyJXDaZjZqkQ3oYrl4N%2Fwk%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1476,7 +1476,7 @@
                 {
                   "icon": {
                     "image_uri": "tos-cn-i-tb4s082cfz/rapid_push_pull_320p.webp",
-                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/rapid_push_pull_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796559453&x-signature=9EzWq3YryqR3rINoXy7%2ForUbhn0%3D",
+                    "image_url": "https://p3-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/rapid_push_pull_320p.webp~tplv-tb4s082cfz-resize:0:0.awebp?lk3s=8e790bc3&x-expires=1796560642&x-signature=cCGvmOYylxjlIVqJ1U7ajQzMzXw%3D",
                     "width": 0,
                     "height": 0,
                     "format": "awebp"
@@ -1706,7 +1706,7 @@
         "extra": {
           "pop_icon": {
             "image_uri": "tos-cn-i-3jr8j4ixpe/vgfm_lite_cover",
-            "image_url": "https://p3-heycan-hgt-sign.byteimg.com/tos-cn-i-3jr8j4ixpe/vgfm_lite_cover~tplv-3jr8j4ixpe-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559453&x-signature=PurconoqidVnrydxTSxxRnp30MY%3D",
+            "image_url": "https://p3-heycan-hgt-sign.byteimg.com/tos-cn-i-3jr8j4ixpe/vgfm_lite_cover~tplv-3jr8j4ixpe-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560642&x-signature=ao7oMS4DH26GgqkII0qOemikgxo%3D",
             "width": 0,
             "height": 0,
             "format": "webp",
@@ -1794,7 +1794,7 @@
   "US": {
     "imageModels": [
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=nsbuzK6aInkZkIpLAmwDyVtBV5U%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=ase9I1SeeqWq7A0w54FUOz5GW5w%3D",
         "model_name_starling_key": "web_image_model_name_4_1",
         "model_tip_starling_key": "web_image_model_desc_4_1",
         "model_req_key": "high_aes_general_v41",
@@ -2029,7 +2029,7 @@
         }
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=I4UzaQlOr3%2B0oKUEdI%2Bq5UdRsK4%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=2xUWrwbUojHEN1je39QrMOOrmks%3D",
         "model_name_starling_key": "dreamina_image4_title",
         "model_tip_starling_key": "dreamina_image4_desc",
         "model_req_key": "high_aes_general_v40",
@@ -2270,7 +2270,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=vc%2BwTXm3Da7Qb7Emi4R6XCPZ4kY%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=MRmyiaOFhg%2FqT4XAPOhE%2FehyNMY%3D",
         "model_name_starling_key": "web_model_name_image_lab",
         "model_tip_starling_key": "web_model_desc_image_lab",
         "model_req_key": "dreamina_image_lib_1",
@@ -2479,7 +2479,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=bVkSEp3TV3lN8ZDm5qyopwCYgvE%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=iR2GZJhvqL7yqF01Ud293Jli2s0%3D",
         "model_name_starling_key": "web_image_model_name_banana",
         "model_tip_starling_key": "web_image_model_desc_banana",
         "model_req_key": "external_model_gemini_flash_image_v25",
@@ -2605,7 +2605,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=fwAGUN4Ki8nEJWiNlbU7RBaAm18%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=zD3E61wbuV5nJxRgF5jIFrGyMtY%3D",
         "model_name_starling_key": "dre_t2i_model_3_1",
         "model_tip_starling_key": "dre_t2i_model_3_1_desc",
         "model_req_key": "high_aes_general_v30l_art:general_v3.0_18b",
@@ -2800,7 +2800,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=xF6zA8ujwNvbTKxhMq9MPQJN2Bo%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=yldN9GpwHXAhNcIm12SmOKaMwFc%3D",
         "model_name_starling_key": "dre_t2i_model_3_0",
         "model_tip_starling_key": "dre_t2i_model_3_0_desc",
         "model_req_key": "high_aes_general_v30l:general_v3.0_18b",
@@ -2996,7 +2996,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=MvFnwC%2FlvBIl4tyPjweIgo03izg%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=3nrZbWYF89EomKnYuOaQXl3E90Q%3D",
         "model_name_starling_key": "dreamina_model_general2_2L",
         "model_tip_starling_key": "dreamina_model_general2_2L_desc",
         "model_req_key": "high_aes_general_v20_L:general_v2.0_L",
@@ -3253,7 +3253,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=lCEU8eDVn%2FETlnH8tYv2%2FNPWyPM%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=QZjCMWobstvWJQr%2FqXp03V3aW7g%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -3374,7 +3374,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=om6Om37qtH4s7KMaIMdCF8z1GI0%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=DJIA2CltSRahE%2FpTCBIkFtHhFSg%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -3513,7 +3513,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/veo3.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=yDb33jNDMV98cnqmTL5y1RDnwqM%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=vzRoRI0qLpJJ74ZxoTHpGIglD9w%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -3629,7 +3629,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=u3sa6PzmSrSlId%2BH%2B85TgN0dteE%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=f5e%2FK4jZfV%2BCUNoltteVBBzFBuE%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -3800,7 +3800,7 @@
         "extra": {
           "pop_icon": {
             "image_uri": "tos-maliva-i-dwpf7vt6ri-us/vgfm_lite_cover",
-            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=yl3f2T2xnRHETcatJ8KAoCn%2Buc4%3D",
+            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=BwXa%2BJwRT7lHH89yuXke2ZC47HI%3D",
             "width": 0,
             "height": 0,
             "format": "webp",
@@ -3854,7 +3854,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_s20l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559455&x-signature=gLvn9E4uiV3o7ZoCPJzsUj7t0FU%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=zlvt0XRQ33UYgs4m9U86e9%2FQaIY%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -3961,7 +3961,7 @@
   "HK": {
     "imageModels": [
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=dFBdz3pEHBalLnrU5JsLWM0G3Fw%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=ase9I1SeeqWq7A0w54FUOz5GW5w%3D",
         "model_name_starling_key": "web_image_model_name_4_1",
         "model_tip_starling_key": "web_image_model_desc_4_1",
         "model_req_key": "high_aes_general_v41",
@@ -4196,7 +4196,7 @@
         }
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=U4cNEdZRxWr5X7q0Kk5MI%2FFWPOY%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=2xUWrwbUojHEN1je39QrMOOrmks%3D",
         "model_name_starling_key": "dreamina_image4_title",
         "model_tip_starling_key": "dreamina_image4_desc",
         "model_req_key": "high_aes_general_v40",
@@ -4437,7 +4437,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=CxZHfj3HBm4HfCzTM%2BsgiGVqNU4%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=MRmyiaOFhg%2FqT4XAPOhE%2FehyNMY%3D",
         "model_name_starling_key": "web_model_name_image_lab",
         "model_tip_starling_key": "web_model_desc_image_lab",
         "model_req_key": "dreamina_image_lib_1",
@@ -4646,7 +4646,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=JB9fy9cam5xmTrN9wUE9ZvQHvU8%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=iR2GZJhvqL7yqF01Ud293Jli2s0%3D",
         "model_name_starling_key": "web_image_model_name_banana",
         "model_tip_starling_key": "web_image_model_desc_banana",
         "model_req_key": "external_model_gemini_flash_image_v25",
@@ -4772,7 +4772,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=slSkvRE6fNtJV4N1iX1ad%2F5D1GE%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=zD3E61wbuV5nJxRgF5jIFrGyMtY%3D",
         "model_name_starling_key": "dre_t2i_model_3_1",
         "model_tip_starling_key": "dre_t2i_model_3_1_desc",
         "model_req_key": "high_aes_general_v30l_art:general_v3.0_18b",
@@ -4967,7 +4967,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=2tqamXdlJmluZdUx40fXN2EH1Q4%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=yldN9GpwHXAhNcIm12SmOKaMwFc%3D",
         "model_name_starling_key": "dre_t2i_model_3_0",
         "model_tip_starling_key": "dre_t2i_model_3_0_desc",
         "model_req_key": "high_aes_general_v30l:general_v3.0_18b",
@@ -5163,7 +5163,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559451&x-signature=n1%2Fxs4%2FiiYTr9TFbapbuAho6RQQ%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560641&x-signature=3nrZbWYF89EomKnYuOaQXl3E90Q%3D",
         "model_name_starling_key": "dreamina_model_general2_2L",
         "model_tip_starling_key": "dreamina_model_general2_2L_desc",
         "model_req_key": "high_aes_general_v20_L:general_v2.0_L",
@@ -5420,7 +5420,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=blldMRt4ugqtyCFLeDjlDR4OXfA%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=QZjCMWobstvWJQr%2FqXp03V3aW7g%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -5541,7 +5541,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=1mMceTeIkn%2FEevmjYq1QhW8GVvI%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=DJIA2CltSRahE%2FpTCBIkFtHhFSg%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -5680,7 +5680,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/veo3.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=tR54OVngxyTchDr2IGZQJNAkiBA%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=vzRoRI0qLpJJ74ZxoTHpGIglD9w%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -5796,7 +5796,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=9VByG%2F%2BbEx1VJHActqa9E8ifchU%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=f5e%2FK4jZfV%2BCUNoltteVBBzFBuE%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -5967,7 +5967,7 @@
         "extra": {
           "pop_icon": {
             "image_uri": "tos-maliva-i-dwpf7vt6ri-us/vgfm_lite_cover",
-            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=UQzRjoYIhXYqN%2BvHhhWWn8FVCLw%3D",
+            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=BwXa%2BJwRT7lHH89yuXke2ZC47HI%3D",
             "width": 0,
             "height": 0,
             "format": "webp",
@@ -6021,7 +6021,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_s20l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=ibWiRlAdVP0jgLNbaantnTPGWso%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=zlvt0XRQ33UYgs4m9U86e9%2FQaIY%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -6128,7 +6128,7 @@
   "JP": {
     "imageModels": [
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=wxVhCxk4ReMpUjvMGyyK1sllBwI%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=vFtlWxPJwKrhFPlYjiPFro8AimM%3D",
         "model_name_starling_key": "web_image_model_name_4_1",
         "model_tip_starling_key": "web_image_model_desc_4_1",
         "model_req_key": "high_aes_general_v41",
@@ -6363,7 +6363,7 @@
         }
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=WmWy6TEnupt7bJ7XEHIW5rWimvc%3D",
+        "icon_url": "https://p19-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=90q12Xoz2LpRi273ZeHiUr6gfWw%3D",
         "model_name_starling_key": "dreamina_image4_title",
         "model_tip_starling_key": "dreamina_image4_desc",
         "model_req_key": "high_aes_general_v40",
@@ -6604,7 +6604,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=1ijc8vFDwNazcMGHaWNjQ5r4xKk%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=q08em4ts5gt9jdKtYNAdvQqAwQg%3D",
         "model_name_starling_key": "web_model_name_image_lab",
         "model_tip_starling_key": "web_model_desc_image_lab",
         "model_req_key": "dreamina_image_lib_1",
@@ -6813,7 +6813,7 @@
         ]
       },
       {
-        "icon_url": "https://p19-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=%2F7PW2v5SUxmW43YBV1y6qJbEW74%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=XJ9JGuvS%2BZl2P%2FbFUDVV9uYtxEE%3D",
         "model_name_starling_key": "web_image_model_name_banana",
         "model_tip_starling_key": "web_image_model_desc_banana",
         "model_req_key": "external_model_gemini_flash_image_v25",
@@ -6939,7 +6939,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=86h9WS6qwkxo%2F43uUdcppEuBMhA%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=WgPwOZWiDpp4azd1FlI14m%2Fvk10%3D",
         "model_name_starling_key": "dre_t2i_model_3_1",
         "model_tip_starling_key": "dre_t2i_model_3_1_desc",
         "model_req_key": "high_aes_general_v30l_art:general_v3.0_18b",
@@ -7134,7 +7134,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=E959ps8NnXZORyRcRM7HAhSIBH8%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=DxRY5AdCPlljAlVDF1acTQcOWX8%3D",
         "model_name_starling_key": "dre_t2i_model_3_0",
         "model_tip_starling_key": "dre_t2i_model_3_0_desc",
         "model_req_key": "high_aes_general_v30l:general_v3.0_18b",
@@ -7330,7 +7330,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559454&x-signature=UK2gdv34pR2J7ix%2FyOOuOHEeEJA%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=7yI%2FHD0AF1i%2FewAioD5YrqbhfME%3D",
         "model_name_starling_key": "dreamina_model_general2_2L",
         "model_tip_starling_key": "dreamina_model_general2_2L_desc",
         "model_req_key": "high_aes_general_v20_L:general_v2.0_L",
@@ -7587,7 +7587,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=blldMRt4ugqtyCFLeDjlDR4OXfA%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=QZjCMWobstvWJQr%2FqXp03V3aW7g%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -7708,7 +7708,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=1mMceTeIkn%2FEevmjYq1QhW8GVvI%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=DJIA2CltSRahE%2FpTCBIkFtHhFSg%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -7847,7 +7847,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/veo3.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=tR54OVngxyTchDr2IGZQJNAkiBA%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=vzRoRI0qLpJJ74ZxoTHpGIglD9w%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -7963,7 +7963,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=9VByG%2F%2BbEx1VJHActqa9E8ifchU%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=f5e%2FK4jZfV%2BCUNoltteVBBzFBuE%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -8134,7 +8134,7 @@
         "extra": {
           "pop_icon": {
             "image_uri": "tos-maliva-i-dwpf7vt6ri-us/vgfm_lite_cover",
-            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=UQzRjoYIhXYqN%2BvHhhWWn8FVCLw%3D",
+            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=BwXa%2BJwRT7lHH89yuXke2ZC47HI%3D",
             "width": 0,
             "height": 0,
             "format": "webp",
@@ -8188,7 +8188,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_s20l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=ibWiRlAdVP0jgLNbaantnTPGWso%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560645&x-signature=zlvt0XRQ33UYgs4m9U86e9%2FQaIY%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -8295,7 +8295,7 @@
   "SG": {
     "imageModels": [
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=nsbuzK6aInkZkIpLAmwDyVtBV5U%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/image_41.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=vFtlWxPJwKrhFPlYjiPFro8AimM%3D",
         "model_name_starling_key": "web_image_model_name_4_1",
         "model_tip_starling_key": "web_image_model_desc_4_1",
         "model_req_key": "high_aes_general_v41",
@@ -8530,7 +8530,7 @@
         }
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=I4UzaQlOr3%2B0oKUEdI%2Bq5UdRsK4%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/model4.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=QyFgF0ue5IAYA7yxz9Qg%2BIUiQNk%3D",
         "model_name_starling_key": "dreamina_image4_title",
         "model_tip_starling_key": "dreamina_image4_desc",
         "model_req_key": "high_aes_general_v40",
@@ -8771,7 +8771,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=vc%2BwTXm3Da7Qb7Emi4R6XCPZ4kY%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/lab.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=q08em4ts5gt9jdKtYNAdvQqAwQg%3D",
         "model_name_starling_key": "web_model_name_image_lab",
         "model_tip_starling_key": "web_model_desc_image_lab",
         "model_req_key": "dreamina_image_lib_1",
@@ -8980,7 +8980,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=bVkSEp3TV3lN8ZDm5qyopwCYgvE%3D",
+        "icon_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/banana1.png~tplv-wopfjsm1ax-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=XJ9JGuvS%2BZl2P%2FbFUDVV9uYtxEE%3D",
         "model_name_starling_key": "web_image_model_name_banana",
         "model_tip_starling_key": "web_image_model_desc_banana",
         "model_req_key": "external_model_gemini_flash_image_v25",
@@ -9106,7 +9106,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=fwAGUN4Ki8nEJWiNlbU7RBaAm18%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_31~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=WgPwOZWiDpp4azd1FlI14m%2Fvk10%3D",
         "model_name_starling_key": "dre_t2i_model_3_1",
         "model_tip_starling_key": "dre_t2i_model_3_1_desc",
         "model_req_key": "high_aes_general_v30l_art:general_v3.0_18b",
@@ -9301,7 +9301,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=xF6zA8ujwNvbTKxhMq9MPQJN2Bo%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_30~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=DxRY5AdCPlljAlVDF1acTQcOWX8%3D",
         "model_name_starling_key": "dre_t2i_model_3_0",
         "model_tip_starling_key": "dre_t2i_model_3_0_desc",
         "model_req_key": "high_aes_general_v30l:general_v3.0_18b",
@@ -9497,7 +9497,7 @@
         ]
       },
       {
-        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796559450&x-signature=MvFnwC%2FlvBIl4tyPjweIgo03izg%3D",
+        "icon_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/img_20l~tplv-fhsjxsyzit-resize:300:300.webp?lk3s=8e790bc3&x-expires=1796560640&x-signature=7yI%2FHD0AF1i%2FewAioD5YrqbhfME%3D",
         "model_name_starling_key": "dreamina_model_general2_2L",
         "model_tip_starling_key": "dreamina_model_general2_2L_desc",
         "model_req_key": "high_aes_general_v20_L:general_v2.0_L",
@@ -9754,7 +9754,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=blldMRt4ugqtyCFLeDjlDR4OXfA%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=oeENgXlu5bWUzJuWNI94nUBFmB4%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -9875,7 +9875,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=1mMceTeIkn%2FEevmjYq1QhW8GVvI%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/video_3_fast.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=IMuM4sedJHlW%2BvcCegET5Paod34%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -10014,7 +10014,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-wopfjsm1ax-sg/veo3.png",
-          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=tR54OVngxyTchDr2IGZQJNAkiBA%3D",
+          "image_url": "https://p16-dreamina-sign-sg.ibyteimg.com/tos-alisg-i-wopfjsm1ax-sg/veo3.png~tplv-wopfjsm1ax-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=CDan5AXdZ62GWhT9Fht1C4%2BDqkk%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -10130,7 +10130,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_30",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=9VByG%2F%2BbEx1VJHActqa9E8ifchU%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_30~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=C10Nq22hfkamA9LMqAxJ052oRHc%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -10301,7 +10301,7 @@
         "extra": {
           "pop_icon": {
             "image_uri": "tos-maliva-i-dwpf7vt6ri-us/vgfm_lite_cover",
-            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=UQzRjoYIhXYqN%2BvHhhWWn8FVCLw%3D",
+            "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/vgfm_lite_cover~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=LUf6SpqP3Ryj%2FnLssfjOqQ33kh0%3D",
             "width": 0,
             "height": 0,
             "format": "webp",
@@ -10355,7 +10355,7 @@
       {
         "icon": {
           "image_uri": "tos-alisg-i-fhsjxsyzit-sg/video_s20l",
-          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796559456&x-signature=ibWiRlAdVP0jgLNbaantnTPGWso%3D",
+          "image_url": "https://p16-heycan-image-sign-sg.ibyteimg.com/tos-alisg-i-fhsjxsyzit-sg/video_s20l~tplv-fhsjxsyzit-resize:0:0.webp?lk3s=8e790bc3&x-expires=1796560646&x-signature=vUlQV0OajBQU%2BnYC0UPGxPq%2BB0w%3D",
           "width": 0,
           "height": 0,
           "format": "webp",
@@ -10459,5 +10459,5 @@
       }
     ]
   },
-  "lastUpdated": "2025-12-06T12:17:36.189Z"
+  "lastUpdated": "2025-12-06T12:37:25.859Z"
 }

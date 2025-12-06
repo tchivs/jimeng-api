@@ -7,14 +7,26 @@ import util from "@/lib/util.ts";
 import { getCredit, receiveCredit, request, parseRegionFromToken, getAssistantId, RegionInfo } from "./core.ts";
 import logger from "@/lib/logger.ts";
 import { SmartPoller, PollingStatus } from "@/lib/smart-poller.ts";
-import { DEFAULT_ASSISTANT_ID_CN, DEFAULT_ASSISTANT_ID_US, DEFAULT_ASSISTANT_ID_HK, DEFAULT_ASSISTANT_ID_JP, DEFAULT_ASSISTANT_ID_SG, DEFAULT_VIDEO_MODEL, DRAFT_VERSION, VIDEO_MODEL_MAP } from "@/api/consts/common.ts";
+import { DEFAULT_ASSISTANT_ID_CN, DEFAULT_ASSISTANT_ID_US, DEFAULT_ASSISTANT_ID_HK, DEFAULT_ASSISTANT_ID_JP, DEFAULT_ASSISTANT_ID_SG, DEFAULT_VIDEO_MODEL, DRAFT_VERSION } from "@/api/consts/common.ts";
 import { uploadImageBuffer } from "@/lib/image-uploader.ts";
 import { extractVideoUrl } from "@/lib/image-utils.ts";
+import { modelConfigService } from "@/lib/model-config.ts";
 
 export const DEFAULT_MODEL = DEFAULT_VIDEO_MODEL;
 
-export function getModel(model: string) {
-  return VIDEO_MODEL_MAP[model] || VIDEO_MODEL_MAP[DEFAULT_MODEL];
+export function getModel(model: string, regionInfo: RegionInfo): string {
+  // 先尝试从动态配置获取
+  const modelReqKey = modelConfigService.getVideoModelReqKey(model, regionInfo);
+  if (modelReqKey) {
+    return modelReqKey;
+  }
+  // 如果找不到，尝试默认模型
+  const defaultModelReqKey = modelConfigService.getVideoModelReqKey(DEFAULT_MODEL, regionInfo);
+  if (defaultModelReqKey) {
+    return defaultModelReqKey;
+  }
+  // 最后回退：直接返回输入的 model（可能已经是 model_req_key）
+  return model;
 }
 
 // 处理本地上传的文件
@@ -79,7 +91,7 @@ export async function generateVideo(
 
   logger.info(`视频生成区域检测: isInternational=${isInternational}`);
 
-  const model = getModel(_model);
+  const model = getModel(_model, regionInfo);
 
   // 将秒转换为毫秒，只支持5秒和10秒
   const durationMs = duration === 10 ? 10000 : 5000;
@@ -211,7 +223,10 @@ export async function generateVideo(
   }
 
   logger.info(`视频生成模式: ${uploadIDs.length}张图片 (首帧: ${!!first_frame_image}, 尾帧: ${!!end_frame_image}), resolution: ${resolution}`);
-  
+
+  // 获取首尾帧视频时使用的默认模型
+  const rootModel = end_frame_image ? getModel('video-3.0', regionInfo) : model;
+
   // 构建请求参数
   const { aigc_data } = await request(
     "post",
@@ -225,7 +240,7 @@ export async function generateVideo(
       },
       data: {
         "extend": {
-          "root_model": end_frame_image ? VIDEO_MODEL_MAP['jimeng-video-3.0'] : model,
+          "root_model": rootModel,
           "m_video_commerce_info": {
             benefit_type: "basic_video_operation_vgfm_v_three",
             resource_id: "generate_video",

@@ -17,6 +17,7 @@
 - 📊 **Detailed Logs**: Structured logging for easy debugging.
 - 🐳 **Docker Support**: Containerized deployment, ready to use out of the box.
 - ⚙️ **Log Level Control**: Dynamically adjust log output level through configuration files.
+- 📋 **Dynamic Model Configuration**: Model configurations are loaded from local JSON files. Supports manual updates via script or API refresh.
 
 ## ⚠ Risk Warning
 
@@ -416,11 +417,20 @@ A: Yes. Direct upload of local files is now supported. Please refer to the "Loca
 > - **Important**: Once image input is provided (image-to-video or first-last frame video), the `ratio` parameter will be ignored, and the video aspect ratio will be determined by the input image's actual ratio. The `resolution` parameter remains effective.
 
 **Supported Video Models**:
-- `jimeng-video-3.0-pro` - Professional Edition
-- `jimeng-video-3.0` - Standard Edition
-- `jimeng-video-3.0-fast` - Fast Edition (China site only)
-- `jimeng-video-2.0-pro` - Professional Edition v2
-- `jimeng-video-2.0` - Standard Edition v2
+
+**China Site (video generation)**:
+- `video-3.0-pro` - Video 3.0 Pro (Best quality, ultra-HD)
+- `video-3.0-fast` - Video 3.0 Fast (Pro-level performance at lower cost)
+- `video-3.0` - Video 3.0 (Precise response, supports multi-shot and camera movement)
+
+**International Sites (video generation)**:
+- `video-3.0-pro` - Video 3.0 Pro
+- `video-3.0-fast` - Video 3.0 Fast
+- `video-3.0` - Video 3.0
+- `veo-3` - Veo 3 Model
+- `video-s2.0-pro` - Video S2.0 Pro
+
+> **Note**: Video model availability varies by region. Use the `/v1/models` or `/v1/models/video` endpoint to check available models for your site.
 
 **Usage Examples**:
 
@@ -523,6 +533,92 @@ data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768
 data: [DONE]
 ```
 
+## 📋 Model Configuration Management
+
+Model configurations (image models and video models) are stored locally in `configs/model-configs.json` and loaded at startup without network requests.
+
+### Update Model Configurations
+
+**Method 1: Using npm script (recommended)**
+```bash
+npm run update-configs
+```
+
+**Method 2: API Refresh (runtime)**
+```bash
+curl -X POST http://localhost:5100/v1/models/config/refresh
+```
+
+### Query Available Models
+
+**Get all models (image + video)**:
+```bash
+curl http://localhost:5100/v1/models
+```
+
+**Get image models by site**:
+```bash
+curl http://localhost:5100/v1/models/image
+```
+
+**Get video models with details**:
+```bash
+curl http://localhost:5100/v1/models/video
+```
+
+**Check configuration status**:
+```bash
+curl http://localhost:5100/v1/models/config/status
+```
+
+### Response Example
+
+**GET /v1/models**:
+```json
+{
+  "data": [
+    {
+      "id": "jimeng-4.1",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "image",
+      "supported_regions": {
+        "china": true,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    },
+    {
+      "id": "video-3.0-pro",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "video",
+      "supported_regions": {
+        "china": false,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    }
+  ]
+}
+```
+
+**GET /v1/models/config/status**:
+```json
+{
+  "sites": {
+    "china": { "imageModelCount": 5, "videoModelCount": 2, "lastUpdated": "2025-12-06T..." },
+    "US": { "imageModelCount": 7, "videoModelCount": 5, "lastUpdated": "2025-12-06T..." },
+    ...
+  },
+  "configFilePath": "..."
+}
+```
+
 ## 🏗️ Project Architecture
 
 ```
@@ -535,6 +631,8 @@ jimeng-api/
 │   │   │   ├── videos.ts        # Video generation logic
 │   │   │   └── chat.ts          # Chat interface logic
 │   │   ├── routes/              # Route definitions
+│   │   │   ├── index.ts         # Main routes
+│   │   │   └── models.ts        # Model configuration routes
 │   │   └── consts/              # Constant definitions
 │   ├── lib/                     # Core library
 │   │   ├── configs/            # Configuration loading
@@ -548,10 +646,14 @@ jimeng-api/
 │   │   ├── logger.ts           # Logger
 │   │   ├── error-handler.ts    # Unified error handling
 │   │   ├── smart-poller.ts     # Smart poller
+│   │   ├── model-config.ts     # Model configuration service
 │   │   └── aws-signature.ts    # AWS signature
 │   ├── daemon.ts               # Daemon process
 │   └── index.ts               # Entry file
 ├── configs/                    # Configuration files
+│   └── model-configs.json     # Model configurations (image + video)
+├── scripts/
+│   └── update-model-configs.ts # Script to update model configs from API
 ├── Dockerfile                 # Docker configuration
 └── package.json              # Project configuration
 ```

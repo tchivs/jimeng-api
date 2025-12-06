@@ -6,9 +6,10 @@ import util from "@/lib/util.ts";
 import { getCredit, receiveCredit, request, parseRegionFromToken, getAssistantId, RegionInfo } from "./core.ts";
 import logger from "@/lib/logger.ts";
 import { SmartPoller, PollingStatus } from "@/lib/smart-poller.ts";
-import { DEFAULT_IMAGE_MODEL, IMAGE_MODEL_MAP, IMAGE_MODEL_MAP_US } from "@/api/consts/common.ts";
+import { DEFAULT_IMAGE_MODEL } from "@/api/consts/common.ts";
 import { uploadImageFromUrl, uploadImageBuffer } from "@/lib/image-uploader.ts";
 import { extractImageUrls } from "@/lib/image-utils.ts";
+import { modelConfigService } from "@/lib/model-config.ts";
 import {
   resolveResolution,
   getBenefitCount,
@@ -24,31 +25,22 @@ import {
 export const DEFAULT_MODEL = DEFAULT_IMAGE_MODEL;
 
 /**
- * 获取模型映射
+ * 获取模型映射（从动态配置获取）
  */
-export function getModel(model: string, isInternational: boolean) {
-  const modelMap = isInternational ? IMAGE_MODEL_MAP_US : IMAGE_MODEL_MAP;
-  if (isInternational && !modelMap[model]) {
-    const supportedModels = Object.keys(modelMap).join(', ');
-    throw new Error(`国际版不支持模型 "${model}"。支持的模型: ${supportedModels}`);
-  }
-  return modelMap[model] || modelMap[DEFAULT_MODEL];
-}
+export function getModel(model: string, regionInfo: RegionInfo) {
+  const modelReqKey = modelConfigService.getModelReqKey(model, regionInfo);
 
-/**
- * 记录分辨率信息
- */
-function logResolutionInfo(_model: string, resolution: ResolutionResult, regionInfo: RegionInfo) {
-  if (!resolution.isForced) return;
-
-  if (_model === 'nanobanana') {
-    if (regionInfo.isUS) {
-      logger.warn('美区 nanobanana 模型固定使用1024x1024分辨率和2k的清晰度，比例固定为1:1。');
-    } else if (regionInfo.isHK || regionInfo.isJP || regionInfo.isSG) {
-      const regionName = regionInfo.isHK ? '香港' : regionInfo.isJP ? '日本' : '新加坡';
-      logger.warn(`${regionName}站 nanobanana 模型固定使用1k清晰度。`);
-    }
+  if (!modelReqKey) {
+    const supportedModels = modelConfigService.getSupportedModels(regionInfo).join(', ');
+    const siteName = regionInfo.isCN ? "国内版" :
+                     regionInfo.isUS ? "美国站" :
+                     regionInfo.isHK ? "香港站" :
+                     regionInfo.isJP ? "日本站" :
+                     regionInfo.isSG ? "新加坡站" : "国际版";
+    throw new Error(`${siteName}不支持模型 "${model}"。支持的模型: ${supportedModels}`);
   }
+
+  return modelReqKey;
 }
 
 /**
@@ -74,11 +66,10 @@ export async function generateImageComposition(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const model = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
   const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);
-  logResolutionInfo(_model, resolutionResult, regionInfo);
 
   const imageCount = images.length;
   logger.info(`使用模型: ${_model} 映射模型: ${model} 图生图功能 ${imageCount}张图片 ${resolutionResult.width}x${resolutionResult.height} 精细度: ${sampleStrength}`);
@@ -272,7 +263,7 @@ export async function generateImages(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const model = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
   logger.info(`使用模型: ${_model} 映射模型: ${model} 分辨率: ${resolution} 比例: ${ratio} 精细度: ${sampleStrength} 智能比例: ${intelligentRatio}`);
 
   return await generateImagesInternal(_model, prompt, { ratio, resolution, sampleStrength, negativePrompt, intelligentRatio }, refreshToken);
@@ -300,11 +291,10 @@ async function generateImagesInternal(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const model = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
   const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);
-  logResolutionInfo(_model, resolutionResult, regionInfo);
 
   // 获取积分
   const { totalCredit, giftCredit, purchaseCredit, vipCredit } = await getCredit(refreshToken);
@@ -463,7 +453,7 @@ async function generateJimeng4xMultiImages(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const model = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
   const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);

@@ -1,6 +1,7 @@
 import util from "@/lib/util.ts";
-import { DRAFT_MIN_VERSION, DRAFT_VERSION, RESOLUTION_OPTIONS } from "@/api/consts/common.ts";
+import { DRAFT_MIN_VERSION, DRAFT_VERSION } from "@/api/consts/common.ts";
 import { RegionInfo, getAssistantId } from "@/api/controllers/core.ts";
+import { modelConfigService } from "@/lib/model-config.ts";
 
 export type RegionKey = "CN" | "US" | "HK" | "JP" | "SG";
 
@@ -20,33 +21,28 @@ function getRegionKey(regionInfo: RegionInfo): RegionKey {
   return "CN";
 }
 
-function lookupResolution(resolution: string = "2k", ratio: string = "1:1") {
-  const resolutionGroup = RESOLUTION_OPTIONS[resolution];
-  if (!resolutionGroup) {
-    const supportedResolutions = Object.keys(RESOLUTION_OPTIONS).join(", ");
-    throw new Error(`不支持的分辨率 "${resolution}"。支持的分辨率: ${supportedResolutions}`);
-  }
-
-  const ratioConfig = resolutionGroup[ratio];
-  if (!ratioConfig) {
-    const supportedRatios = Object.keys(resolutionGroup).join(", ");
-    throw new Error(`在 "${resolution}" 分辨率下，不支持的比例 "${ratio}"。支持的比例: ${supportedRatios}`);
-  }
+/**
+ * 从动态配置中查找分辨率和比例信息
+ * @param modelId 用户模型 ID (如 jimeng-4.1)
+ * @param resolution 分辨率 (如 2k, 4k)
+ * @param ratio 比例 (如 1:1, 16:9)
+ * @param regionInfo 地区信息
+ */
+function lookupResolution(modelId: string, resolution: string = "2k", ratio: string = "1:1", regionInfo: RegionInfo) {
+  // 使用 modelConfigService 进行校验并获取尺寸
+  const sizeInfo = modelConfigService.getImageSizeWithValidation(modelId, resolution, ratio, regionInfo);
 
   return {
-    width: ratioConfig.width,
-    height: ratioConfig.height,
-    imageRatio: ratioConfig.ratio,
+    width: sizeInfo.width,
+    height: sizeInfo.height,
+    imageRatio: sizeInfo.ratioType,
     resolutionType: resolution,
   };
 }
 
 /**
  * 统一分辨率处理逻辑
- * - CN 站: 不支持 nano 系列模型 (nanobanana/nanobananapro)，抛出异常
- * - US 站 nanobanana: 强制 1024x1024 @ 2k，image_ratio=1
- * - HK/JP/SG 站 nanobanana: 强制 1k 分辨率，但 ratio 可自定义
- * - 所有站点 nanobananapro: resolution 和 ratio 都可自定义
+ * 从动态配置校验并获取尺寸
  */
 export function resolveResolution(
   userModel: string,
@@ -54,41 +50,8 @@ export function resolveResolution(
   resolution: string = "2k",
   ratio: string = "1:1"
 ): ResolutionResult {
-  const regionKey = getRegionKey(regionInfo);
-
-  // ⚠️ 国内站不支持nano系列模型
-  if (regionKey === "CN" && (userModel === "nanobanana" || userModel === "nanobananapro")) {
-    throw new Error(
-      `国内站不支持${userModel}模型,请使用jimeng系列模型`
-    );
-  }
-
-  // ⚠️ nanobanana 模型的站点差异处理
-  if (userModel === "nanobanana") {
-    if (regionKey === "US") {
-      // US 站: 强制 1024x1024@2k, ratio 固定为 1
-      return {
-        width: 1024,
-        height: 1024,
-        imageRatio: 1,
-        resolutionType: "2k",
-        isForced: true,
-      };
-    } else if (regionKey === "HK" || regionKey === "JP" || regionKey === "SG") {
-      // HK/JP/SG 站: 强制 1k 分辨率，但 ratio 可自定义
-      const params = lookupResolution("1k", ratio);
-      return {
-        width: params.width,
-        height: params.height,
-        imageRatio: params.imageRatio,
-        resolutionType: "1k",
-        isForced: true,
-      };
-    }
-  }
-
-  // 其他所有情况: 使用用户指定的 resolution 和 ratio
-  const params = lookupResolution(resolution, ratio);
+  // 使用用户指定的 resolution 和 ratio，并进行动态配置校验
+  const params = lookupResolution(userModel, resolution, ratio, regionInfo);
   return {
     ...params,
     isForced: false,

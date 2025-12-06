@@ -18,7 +18,8 @@
     "build": "tsup src/index.ts --format cjs,esm --sourcemap --dts --clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"src/**/*.{ts,js,json}\"",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "update-configs": "npx tsx scripts/update-model-configs.ts"
   },
   "author": "Jimeng API Team",
   "license": "GPL-3.0",

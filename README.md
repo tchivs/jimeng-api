@@ -11,32 +11,33 @@
 - 🎨 **AI Image Generation**: Supports multiple models and resolutions (default 2K, supports 4K, 1K).
 - 🖼️ **Image-to-Image Synthesis**: Supports local images or image URLs.
 - 🎬 **AI Video Generation**: Supports text-to-video generation, and adds local image upload for image-to-video on the China site.
-- 🌐 **International Site Support**: Added support for text-to-image and image-to-image APIs on Dreamina international sites. Open an issue if you run into problems.
+- 🌐 **International Site Support**: Added support for text-to-image and image-to-image APIs for the Dreamina international site. Please file an issue if you encounter problems.
 - 🔄 **Smart Polling**: Adaptive polling mechanism to optimize generation efficiency.
 - 🛡️ **Unified Exception Handling**: Comprehensive error handling and retry mechanism.
 - 📊 **Detailed Logs**: Structured logging for easy debugging.
 - 🐳 **Docker Support**: Containerized deployment, ready to use out of the box.
 - ⚙️ **Log Level Control**: Dynamically adjust log output level through configuration files.
+- 📋 **Dynamic Model Configuration**: Model configurations are loaded from local JSON files. Supports manual updates via script or API refresh.
 
 ## ⚠ Risk Warning
 
 - This project is for research and educational purposes only. It does not accept any financial donations or transactions!
-- For personal use and research only. Avoid putting pressure on the official servers. Abuse may result in account bans or legal action.
-- For personal use and research only. Avoid putting pressure on the official servers. Abuse may result in account bans or legal action.
-- For personal use and research only. Avoid putting pressure on the official servers. Abuse may result in account bans or legal action.
+- For personal use and research only. Avoid putting pressure on the official servers. Violators may have their accounts banned or, in serious cases, break the law!
+- For personal use and research only. Avoid putting pressure on the official servers. Violators may have their accounts banned or, in serious cases, break the law!
+- For personal use and research only. Avoid putting pressure on the official servers. Violators may have their accounts banned or, in serious cases, break the law!
 
 ## ✨ New Feature Highlights
 
 ### 📐 `ratio` and `resolution` Parameter Support
 
-Image dimensions are now controlled by the `ratio` and `resolution` parameters, giving you more flexibility. The default `resolution` is set to `2k`.
+Image dimensions are now controlled by the `ratio` and `resolution` parameters, providing greater flexibility. The default `resolution` is set to `2k`.
 
 ```bash
 curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"prompt\": \"A beautiful girl, film-like feel\", \"ratio\": \"4:3\", \"resolution\": \"2k\"}"
+    "{\"model\": \"jimeng-4.0\", \"prompt\": \"A beautiful girl, film-like feel\", \"ratio\": \"4:3\", \"resolution\": \"2k\"}"
 ```
 
 **Supported resolutions**: `1k`, `2k`, `4k`
@@ -46,19 +47,19 @@ curl -X POST http://localhost:5100/v1/images/generations \
 ## 🚀 Quick Start
 
 ### Getting `sessionid`
-- Getting your `sessionid` works the same way on both the China site (Jimeng) and international sites (Dreamina) — see the screenshot below.
-> **Note 1**: The API endpoints are the same for the China site and international sites, but use different prefixes:
-> - **China site**: Use the `sessionid` directly, e.g., `Bearer your_session_id`
+- The method for obtaining the `sessionid` is the same for the domestic site (Jimeng), international site (Dreamina), as shown in the image below.
+> **Note 1**: The API endpoints are the same for domestic and international sites, but require different prefixes to distinguish:
+> - **Domestic site**: Use sessionid directly, e.g., `Bearer your_session_id`
 > - **US site**: Add **us-** prefix, e.g., `Bearer us-your_session_id`
 > - **Hong Kong site**: Add **hk-** prefix, e.g., `Bearer hk-your_session_id`
 > - **Japan site**: Add **jp-** prefix, e.g., `Bearer jp-your_session_id`
 > - **Singapore site**: Add **sg-** prefix, e.g., `Bearer sg-your_session_id`
 >
-> **Note 2**: The China site and international sites now support both *text-to-image* and *image-to-image*. The nanobanana and nanobananapro models are available on international sites.
+> **Note 2**: Domestic and international sites now support both *text-to-image* and *image-to-image*. The nanobanana and nanobananapro models have been added for the international site.
 >
-> **Note 3**: Resolution rules when using the nanobanana model on international sites:
-> - **US site (us-)**: Images are fixed at **1024x1024** with **2k** resolution, ignoring user-provided ratio and resolution parameters
-> - **Hong Kong/Japan/Singapore sites (hk-/jp-/sg-)**: Fixed **1k** resolution, but supports custom `ratio` values (e.g., 16:9, 4:3, etc.)
+> **Note 3**: Resolution rules for nanobanana models on international sites (loaded dynamically from config):
+> - **Nano Banana**: Only supports **1k** resolution, with custom ratio options (e.g., 1:1, 16:9, 4:3, etc.)
+> - **Nano Banana Pro**: Supports **2k** and **4k** resolutions, with custom ratio options
 
 ![](https://github.com/iptag/jimeng-api/blob/main/get_sessionid.png)
 
@@ -70,7 +71,7 @@ curl -X POST http://localhost:5100/v1/images/generations \
 
 ### Installation and Deployment
 
-#### Method 1: Pull and Update the Docker Image (Recommended)
+#### Method 1: Docker Image Pull and Update (Recommended)
 
 **Pull command**
 ```bash
@@ -145,7 +146,7 @@ docker exec -it jimeng-api sh
 - ✅ **Unified port**: Uses port 5100 both inside and outside the container
 - ✅ **Log management**: Structured log output
 
-### Configuration
+### Configuration Description
 
 #### `configs/dev/service.yml`
 ```yaml
@@ -207,7 +208,7 @@ User: "my sessionid is xxxxx，Generate a 2K 16:9 image of a futuristic city at 
 Claude: [Automatically invokes the skill, generates images, and saves to /pic directory]
 ```
 
-For more details, see `jimeng-api/Skill.md`.
+For detailed usage, please refer to `jimeng-api/Skill.md`.
 
 ## 📖 API Documentation
 
@@ -216,12 +217,12 @@ For more details, see `jimeng-api/Skill.md`.
 **POST** `/v1/images/generations`
 
 **Request Parameters**:
-- `model` (string, optional): The name of the model to use. Defaults to `jimeng-4.5` on all sites (China/US/HK/JP/SG).
+- `model` (string): The name of the model to use.
 - `prompt` (string): The text description of the image.
 - `ratio` (string, optional): The aspect ratio of the image, defaults to `"1:1"`. Supported ratios: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`. **Note**: When `intelligent_ratio` is `true`, this parameter will be ignored and the system will automatically infer the optimal ratio from the prompt.
 - `resolution` (string, optional): The resolution level, defaults to `"2k"`. Supported resolutions: `1k`, `2k`, `4k`.
-- `intelligent_ratio` (boolean, optional): Whether to enable intelligent ratio, defaults to `false`. **⚠️ This parameter only works for the jimeng-4.0/jimeng-4.1/jimeng-4.5 model; other models will ignore it.** When enabled, the system automatically infers the optimal image ratio from the prompt (e.g., "portrait" → 9:16, "landscape" → 16:9).
-- `negative_prompt` (string, optional): Negative prompt.
+- `intelligent_ratio` (boolean, optional): Whether to enable intelligent ratio, defaults to `false`. **⚠️ This parameter only works for the jimeng-4.0/jimeng-4.1 model; other models will ignore it.** When enabled, the system automatically infers the optimal image ratio from the prompt (e.g., "portrait" → 9:16, "landscape" → 16:9).
+- `negative_prompt` (string, optional): Negative prompt words.
 - `sample_strength` (number, optional): Sampling strength (0.0-1.0).
 - `response_format` (string, optional): Response format ("url"(default) or "b64_json").
 
@@ -231,33 +232,31 @@ curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"prompt\": \"A cute little cat\"}"
+    "{\"model\": \"jimeng-4.0\", \"prompt\": \"A cute little cat\"}"
 
 # Example using 4K resolution
 curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"prompt\": \"Magnificent landscape, ultra-high resolution\", \"ratio\": \"16:9\", \"resolution\": \"4k\"}"
+    "{\"model\": \"jimeng-4.0\", \"prompt\": \"Magnificent landscape, ultra-high resolution\", \"ratio\": \"16:9\", \"resolution\": \"4k\"}"
 
 # Example using intelligent ratio (system will infer 9:16 from "portrait")
 curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"prompt\": \"A running lion, portrait orientation\", \"resolution\": \"2k\", \"intelligent_ratio\": true}"
+    "{\"model\": \"jimeng-4.0\", \"prompt\": \"A running lion, portrait orientation\", \"resolution\": \"2k\", \"intelligent_ratio\": true}"
 ```
 
-**Supported Models**:
-- `nanobananapro`: International sites only, supports `ratio` and `resolution`.
-- `nanobanana`: International sites only.
-- `jimeng-4.5`: Works on all sites, supports all 2k/4k ratios and intelligent_ratio. **(Default for all sites)**
-- `jimeng-4.1`: Works on all sites, supports all 2k/4k ratios and intelligent_ratio.
-- `jimeng-4.0`: Works on all sites.
-- `jimeng-3.1`: China site only.
-- `jimeng-3.0`: Works on all sites.
-- `jimeng-2.1`: China site only.
-- `jimeng-xl-pro`
+**Supported Models** (dynamically loaded from config, use `/v1/models` to query the latest list):
+- `jimeng-4.1`: Supported on both domestic and international sites, supports 2k/4k resolutions
+- `jimeng-4.0`: Supported on both domestic and international sites, supports 2k/4k resolutions
+- `jimeng-3.1`: Only supported on domestic site (international: `jimeng-3.1-intl`), supports 1k/2k resolutions
+- `jimeng-3.0`: Supported on both domestic and international sites, supports 1k/2k resolutions
+- `nanobananapro`: Only supported on international sites, supports 2k/4k resolutions
+- `nanobanana`: Only supported on international sites, only supports 1k resolution
+- `jimeng-2.0-pro`: Only supported on international sites, only supports 1k resolution
 
 **Supported Ratios and Corresponding Resolutions**:
 | resolution | ratio | Resolution |
@@ -291,7 +290,7 @@ curl -X POST http://localhost:5100/v1/images/generations \
 
 **POST** `/v1/images/compositions`
 
-Generate a new image based on one or more input images, combined with a text prompt. Supports creative modes like image blending, style transfer, and content synthesis.
+**Function Description**: Generate a new image based on one or more input images, combined with a text prompt. Supports various creative modes like image blending, style transfer, and content synthesis.
 
 ```bash
 # International site image-to-image example (local file upload)
@@ -301,26 +300,26 @@ Generate a new image based on one or more input images, combined with a text pro
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer us-YOUR_SESSION_ID" \
   -F "prompt=A cute cat, anime style" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "images=@/path/to/your/local/cat.jpg"
 ```
 
 **Request Parameters**:
-- `model` (string, optional): The name of the model to use. Defaults to `jimeng-4.5` on all sites (China/US/HK/JP/SG).
+- `model` (string): The name of the model to use.
 - `prompt` (string): Text description of the image to guide the generation.
 - `images` (array): An array of input images.
 - `ratio` (string, optional): The aspect ratio of the image, defaults to `"1:1"`. Supported ratios: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`.
 - `resolution` (string, optional): The resolution level, defaults to `"2k"`. Supported resolutions: `1k`, `2k`, `4k`.
-- `intelligent_ratio` (boolean, optional): Whether to enable intelligent ratio, defaults to `false`. **⚠️ This parameter only works for the jimeng-4.0/jimeng-4.1/jimeng-4.5 model; other models will ignore it.** When enabled, the system automatically adjusts the output ratio based on the prompt and input images.
-- `negative_prompt` (string, optional): Negative prompt.
+- `intelligent_ratio` (boolean, optional): Whether to enable intelligent ratio, defaults to `false`. **⚠️ This parameter only works for the jimeng-4.0/jimeng-4.1 model; other models will ignore it.** When enabled, the system automatically adjusts the output ratio based on the prompt and input images.
+- `negative_prompt` (string, optional): Negative prompt words.
 - `sample_strength` (number, optional): Sampling strength (0.0-1.0).
 - `response_format` (string, optional): Response format ("url"(default) or "b64_json").
 
-**Limits**:
+**Usage Restrictions**:
 - Number of input images: 1-10
-- Supported image formats: Common formats (JPG, PNG, WebP, etc.).
-- Image size limit: Recommended not to exceed 100MB per image.
-- Generation time: Typically 30 seconds to 5 minutes; complex compositions may take longer.
+- Supported image formats: Common formats like JPG, PNG, WebP, etc.
+- Image size limit: Recommended not to exceed 10MB per image.
+- Generation time: Usually 30 seconds to 5 minutes, complex compositions may take longer.
 
 **Usage Examples**:
 
@@ -330,13 +329,13 @@ curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"prompt\": \"Convert this photo into an oil painting style, with vibrant colors and distinct brushstrokes\", \"images\": [\"https://example.com/photo.jpg\"], \"ratio\": \"1:1\", \"resolution\": \"2k\", \"sample_strength\": 0.7}"
+    "{\"model\": \"jimeng-4.0\", \"prompt\": \"Convert this photo into an oil painting style, with vibrant colors and distinct brushstrokes\", \"images\": [\"https://example.com/photo.jpg\"], \"ratio\": \"1:1\", \"resolution\": \"2k\", \"sample_strength\": 0.7}"
 
 # Example 2: Local single file upload (using multipart/form-data)
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -F "prompt=A cute cat, anime style" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "ratio=1:1" \
   -F "resolution=1k" \
   -F "images=@/path/to/your/local/cat.jpg"
@@ -345,7 +344,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -F "prompt=Merge these two images" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "images=@/path/to/your/image1.jpg" \
   -F "images=@/path/to/your/image2.png"
 ```
@@ -366,30 +365,30 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 
 #### ❓ **FAQ & Solutions**
 
-**Q: What if my upload fails?**
-A: Make sure the image URL is reachable, the format is supported, and the file size is under 100MB.
+**Q: What to do if image upload fails?**
+A: Check if the image URL is accessible, ensure the image format is correct, and the file size does not exceed 10MB.
 
-**Q: What if generation takes too long?**
-A: Complex multi-image compositions can take longer. If it still isn't done after 10 minutes, try resubmitting the request.
+**Q: What to do if generation takes too long?**
+A: Complex multi-image compositions take longer. Please be patient. If it's not completed after 10 minutes, you can resubmit the request.
 
 **Q: How to improve composition quality?**
 A:
-- Start with high-quality input images.
-- Write clear, detailed prompts.
-- Tune the `sample_strength` parameter.
-- Avoid mixing too many conflicting styles.
+- Use high-quality input images.
+- Write detailed and accurate prompts.
+- Adjust the `sample_strength` parameter appropriately.
+- Avoid using too many conflicting image styles.
 
 **Q: What image formats are supported?**
-A: Common formats (JPG, PNG, WebP, GIF) work. JPG or PNG is recommended.
+A: Common formats like JPG, PNG, WebP, GIF are supported. JPG or PNG are recommended.
 
 **Q: Can I use local images?**
-A: Yes—direct local file upload is supported. See the "Local single file upload" example above. You can also keep using image URLs.
+A: Yes. Direct upload of local files is now supported. Please refer to the "Local file upload example" above. You can also continue to use the network image URL method.
 
 ### Video Generation
 
 **POST** `/v1/videos/generations`
 
-Generate a video from a text prompt (Text-to-Video) or from start/end frame images (Image-to-Video). Supports three generation modes:
+**Function Description**: Generate a video based on a text prompt (Text-to-Video), or combined with input start/end frame images (Image-to-Video). Supports three generation modes:
 
 1. **Text-to-Video**: Pure text prompt without any images
 2. **Image-to-Video**: Single image as the first frame
@@ -404,12 +403,8 @@ Generate a video from a text prompt (Text-to-Video) or from start/end frame imag
 - `model` (string): The name of the video model to use.
 - `prompt` (string): The text description of the video content.
 - `ratio` (string, optional): Video aspect ratio, defaults to `"1:1"`. Supported ratios: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `21:9`. **Note**: In image-to-video mode (when images are provided), this parameter will be ignored, and the video aspect ratio will be determined by the input image's actual ratio.
-- `resolution` (string, optional): Video resolution, defaults to `"720p"`. Supported resolutions: `720p`, `1080p`. **Note**: Only `jimeng-video-3.0` and `jimeng-video-3.0-fast` support this parameter; other models ignore it.
-- `duration` (number, optional): Video duration in seconds. Supported values vary by model:
-  - `jimeng-video-veo3` / `jimeng-video-veo3.1`: `8` (fixed)
-  - `jimeng-video-sora2`: `4` (default), `8`, `12`
-  - `jimeng-video-3.5-pro`: `5` (default), `10`, `12`
-  - Other models: `5` (default), `10`
+- `resolution` (string, optional): Video resolution, defaults to `"720p"`. Supported resolutions: `720p`, `1080p`.
+- `duration` (number, optional): Video duration in seconds, defaults to `5`. Supported values: `5` (5 seconds), `10` (10 seconds).
 - `file_paths` (array, optional): An array of image URLs to specify the **start frame** (1st element) and **end frame** (2nd element) of the video.
 - `[file]` (file, optional): Local image files uploaded via `multipart/form-data` (up to 2) to specify the **start frame** and **end frame**. The field name can be arbitrary, e.g., `image1`.
 - `response_format` (string, optional): Response format, supports `url` (default) or `b64_json`.
@@ -421,17 +416,20 @@ Generate a video from a text prompt (Text-to-Video) or from start/end frame imag
 > - **Important**: Once image input is provided (image-to-video or first-last frame video), the `ratio` parameter will be ignored, and the video aspect ratio will be determined by the input image's actual ratio. The `resolution` parameter remains effective.
 
 **Supported Video Models**:
-- `jimeng-video-3.5-pro` - Professional Edition v3.5, works on all sites **(Default)**
-- `jimeng-video-veo3` - Veo3 model, Asia international sites only (HK/JP/SG), fixed 8s duration
-- `jimeng-video-veo3.1` - Veo3.1 model, Asia international sites only (HK/JP/SG), fixed 8s duration
-- `jimeng-video-sora2` - Sora2 model, Asia international sites only (HK/JP/SG)
-- `jimeng-video-3.0-pro` - Professional Edition, China and Asia international sites (HK/JP/SG)
-- `jimeng-video-3.0` - Standard Edition, works on all sites
-- `jimeng-video-3.0-fast` - Fast Edition, China and Asia international sites (HK/JP/SG)
-- `jimeng-video-2.0-pro` - Professional Edition v2, China and Asia international sites (HK/JP/SG)
-- `jimeng-video-2.0` - Standard Edition v2, China and Asia international sites (HK/JP/SG)
 
-> **Note**: US site only supports `jimeng-video-3.5-pro` and `jimeng-video-3.0` models.
+**China Site (video generation)**:
+- `video-3.0-pro` - Video 3.0 Pro (Best quality, ultra-HD)
+- `video-3.0-fast` - Video 3.0 Fast (Pro-level performance at lower cost)
+- `video-3.0` - Video 3.0 (Precise response, supports multi-shot and camera movement)
+
+**International Sites (video generation)**:
+- `video-3.0-pro` - Video 3.0 Pro
+- `video-3.0-fast` - Video 3.0 Fast
+- `video-3.0` - Video 3.0
+- `veo-3` - Veo 3 Model
+- `video-s2.0-pro` - Video S2.0 Pro
+
+> **Note**: Video model availability varies by region. Use the `/v1/models` or `/v1/models/video` endpoint to check available models for your site.
 
 **Usage Examples**:
 
@@ -480,62 +478,7 @@ curl -X POST http://localhost:5100/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d \
-    "{\"model\": \"jimeng-4.5\", \"messages\": [ { \"role\": \"user\", \"content\": \"Draw a landscape painting\" } ]}"
-```
-
-### Token API
-
-#### Check Token Status
-
-**POST** `/token/check`
-
-Check if a token is valid and active.
-
-**Request Parameters**:
-- `token` (string): The session token to check
-
-#### Get Credit Points
-
-**POST** `/token/points`
-
-Get the current credit balance for one or more tokens.
-
-**Request Headers**:
-- `Authorization`: Bearer token(s), multiple tokens separated by commas
-
-#### Receive Daily Credits
-
-**POST** `/token/receive`
-
-Manually trigger daily credit collection (check-in). Attempts to claim credits and returns the latest credit information regardless of claim success.
-
-**Request Headers**:
-- `Authorization`: Bearer token(s), multiple tokens separated by commas
-
-**Response Format**:
-```json
-[
-  {
-    "token": "your_token",
-    "credits": {
-      "giftCredit": 10,
-      "purchaseCredit": 0,
-      "vipCredit": 0,
-      "totalCredit": 10
-    }
-  }
-]
-```
-
-**Usage Example**:
-```bash
-# Single token
-curl -X POST http://localhost:5100/token/receive \
-  -H "Authorization: Bearer YOUR_SESSION_ID"
-
-# Multiple tokens
-curl -X POST http://localhost:5100/token/receive \
-  -H "Authorization: Bearer TOKEN1,TOKEN2,TOKEN3"
+    "{\"model\": \"jimeng-4.0\", \"messages\": [ { \"role\": \"user\", \"content\": \"Draw a landscape painting\" } ]}"
 ```
 
 ## 🔍 API Response Format
@@ -561,7 +504,7 @@ curl -X POST http://localhost:5100/token/receive \
   "id": "chatcmpl-123",
   "object": "chat.completion",
   "created": 1759058768,
-  "model": "jimeng-4.5",
+  "model": "jimeng-4.0",
   "choices": [
     {
       "index": 0,
@@ -582,11 +525,97 @@ curl -X POST http://localhost:5100/token/receive \
 
 ### Stream Response (SSE)
 ```
-data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.5","choices":[{"index":0,"delta":{"role":"assistant","content":"🎨 Generating image, please wait..."},"finish_reason":null}]}
+data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.0","choices":[{"index":0,"delta":{"role":"assistant","content":"🎨 Generating image, please wait..."},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.5","choices":[{"index":1,"delta":{"role":"assistant","content":"![image](https://example.com/image.jpg)"},"finish_reason":"stop"}]}
+data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.0","choices":[{"index":1,"delta":{"role":"assistant","content":"![image](https://example.com/image.jpg)"},"finish_reason":"stop"}]}
 
 data: [DONE]
+```
+
+## 📋 Model Configuration Management
+
+Model configurations (image models and video models) are stored locally in `configs/model-configs.json` and loaded at startup without network requests.
+
+### Update Model Configurations
+
+**Method 1: Using npm script (recommended)**
+```bash
+npm run update-configs
+```
+
+**Method 2: API Refresh (runtime)**
+```bash
+curl -X POST http://localhost:5100/v1/models/config/refresh
+```
+
+### Query Available Models
+
+**Get all models (image + video)**:
+```bash
+curl http://localhost:5100/v1/models
+```
+
+**Get image models by site**:
+```bash
+curl http://localhost:5100/v1/models/image
+```
+
+**Get video models with details**:
+```bash
+curl http://localhost:5100/v1/models/video
+```
+
+**Check configuration status**:
+```bash
+curl http://localhost:5100/v1/models/config/status
+```
+
+### Response Example
+
+**GET /v1/models**:
+```json
+{
+  "data": [
+    {
+      "id": "jimeng-4.1",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "image",
+      "supported_regions": {
+        "china": true,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    },
+    {
+      "id": "video-3.0-pro",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "video",
+      "supported_regions": {
+        "china": false,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    }
+  ]
+}
+```
+
+**GET /v1/models/config/status**:
+```json
+{
+  "sites": {
+    "china": { "imageModelCount": 5, "videoModelCount": 2, "lastUpdated": "2025-12-06T..." },
+    "US": { "imageModelCount": 7, "videoModelCount": 5, "lastUpdated": "2025-12-06T..." },
+    ...
+  },
+  "configFilePath": "..."
+}
 ```
 
 ## 🏗️ Project Architecture
@@ -601,6 +630,8 @@ jimeng-api/
 │   │   │   ├── videos.ts        # Video generation logic
 │   │   │   └── chat.ts          # Chat interface logic
 │   │   ├── routes/              # Route definitions
+│   │   │   ├── index.ts         # Main routes
+│   │   │   └── models.ts        # Model configuration routes
 │   │   └── consts/              # Constant definitions
 │   ├── lib/                     # Core library
 │   │   ├── configs/            # Configuration loading
@@ -614,10 +645,14 @@ jimeng-api/
 │   │   ├── logger.ts           # Logger
 │   │   ├── error-handler.ts    # Unified error handling
 │   │   ├── smart-poller.ts     # Smart poller
+│   │   ├── model-config.ts     # Model configuration service
 │   │   └── aws-signature.ts    # AWS signature
 │   ├── daemon.ts               # Daemon process
 │   └── index.ts               # Entry file
 ├── configs/                    # Configuration files
+│   └── model-configs.json     # Model configurations (image + video)
+├── scripts/
+│   └── update-model-configs.ts # Script to update model configs from API
 ├── Dockerfile                 # Docker configuration
 └── package.json              # Project configuration
 ```
@@ -664,21 +699,21 @@ export const RETRY_CONFIG = {
 ### Common Issues
 
 1.  **JSON Parsing Error**
-    -   Make sure your request body is valid.
+    -   Check if the request body format is correct.
     -   The system will automatically fix common format issues.
 
 2.  **Invalid `sessionid`**
-    -   Get a fresh `sessionid` from the appropriate site.
+    -   Re-obtain the `sessionid` for the corresponding site.
     -   Check if the `sessionid` format is correct.
 
 3.  **Generation Timeout**
-    -   Image generation: up to 15 minutes max (may queue during peak hours).
-    -   Video generation: up to 20 minutes max.
-    -   The system will automatically handle timeouts and return an error message.
+    -   Image generation: usually 1-3 minutes.
+    -   Video generation: usually 3-15 minutes.
+    -   The system will automatically handle timeouts.
 
 4.  **Insufficient Credits**
     -   Go to the Jimeng/Dreamina official website to check your credit balance.
-    -   The API returns detailed credit info.
+    -   The system will provide detailed credit status information.
 
 ## 🙏 Acknowledgements
 

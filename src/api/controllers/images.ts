@@ -6,9 +6,10 @@ import util from "@/lib/util.ts";
 import { getCredit, receiveCredit, request, parseRegionFromToken, getAssistantId, RegionInfo } from "./core.ts";
 import logger from "@/lib/logger.ts";
 import { SmartPoller, PollingStatus } from "@/lib/smart-poller.ts";
-import { DEFAULT_IMAGE_MODEL, DEFAULT_IMAGE_MODEL_US, IMAGE_MODEL_MAP, IMAGE_MODEL_MAP_US } from "@/api/consts/common.ts";
+import { DEFAULT_IMAGE_MODEL } from "@/api/consts/common.ts";
 import { uploadImageFromUrl, uploadImageBuffer } from "@/lib/image-uploader.ts";
 import { extractImageUrls } from "@/lib/image-utils.ts";
+import { modelConfigService } from "@/lib/model-config.ts";
 import {
   resolveResolution,
   getBenefitCount,
@@ -22,50 +23,24 @@ import {
 } from "@/api/builders/payload-builder.ts";
 
 export const DEFAULT_MODEL = DEFAULT_IMAGE_MODEL;
-export const DEFAULT_MODEL_US = DEFAULT_IMAGE_MODEL_US;
-
-export interface ModelResult {
-  model: string;
-  userModel: string;
-}
 
 /**
- * 获取模型映射
- * - 国际站不支持的模型会抛出错误
- * - 但如果传入的是国内站默认模型，国际站会自动回退到国际站默认模型
+ * 获取模型映射（从动态配置获取）
  */
-export function getModel(model: string, isInternational: boolean): ModelResult {
-  const modelMap = isInternational ? IMAGE_MODEL_MAP_US : IMAGE_MODEL_MAP;
-  const defaultModel = isInternational ? DEFAULT_MODEL_US : DEFAULT_MODEL;
+export function getModel(model: string, regionInfo: RegionInfo) {
+  const modelReqKey = modelConfigService.getModelReqKey(model, regionInfo);
 
-  if (isInternational && !modelMap[model]) {
-    // 如果传入的是国内站默认模型，回退到国际站默认模型
-    if (model === DEFAULT_MODEL) {
-      logger.info(`国际站不支持默认模型 "${model}"，回退到 "${defaultModel}"`);
-      return { model: modelMap[defaultModel], userModel: defaultModel };
-    }
-    const supportedModels = Object.keys(modelMap).join(', ');
-    throw new Error(`国际版不支持模型 "${model}"。支持的模型: ${supportedModels}`);
+  if (!modelReqKey) {
+    const supportedModels = modelConfigService.getSupportedModels(regionInfo).join(', ');
+    const siteName = regionInfo.isCN ? "国内版" :
+                     regionInfo.isUS ? "美国站" :
+                     regionInfo.isHK ? "香港站" :
+                     regionInfo.isJP ? "日本站" :
+                     regionInfo.isSG ? "新加坡站" : "国际版";
+    throw new Error(`${siteName}不支持模型 "${model}"。支持的模型: ${supportedModels}`);
   }
 
-  const effectiveUserModel = modelMap[model] ? model : defaultModel;
-  return { model: modelMap[effectiveUserModel], userModel: effectiveUserModel };
-}
-
-/**
- * 记录分辨率信息
- */
-function logResolutionInfo(userModel: string, resolution: ResolutionResult, regionInfo: RegionInfo) {
-  if (!resolution.isForced) return;
-
-  if (userModel === 'nanobanana') {
-    if (regionInfo.isUS) {
-      logger.warn('美区 nanobanana 模型固定使用1024x1024分辨率和2k的清晰度，比例固定为1:1。');
-    } else if (regionInfo.isHK || regionInfo.isJP || regionInfo.isSG) {
-      const regionName = regionInfo.isHK ? '香港' : regionInfo.isJP ? '日本' : '新加坡';
-      logger.warn(`${regionName}站 nanobanana 模型固定使用1k清晰度。`);
-    }
-  }
+  return modelReqKey;
 }
 
 /**
@@ -91,14 +66,13 @@ export async function generateImageComposition(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const { model, userModel } = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
-  const resolutionResult = resolveResolution(userModel, regionInfo, resolution, ratio);
-  logResolutionInfo(userModel, resolutionResult, regionInfo);
+  const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);
 
   const imageCount = images.length;
-  logger.info(`使用模型: ${userModel} 映射模型: ${model} 图生图功能 ${imageCount}张图片 ${resolutionResult.width}x${resolutionResult.height} 精细度: ${sampleStrength}`);
+  logger.info(`使用模型: ${_model} 映射模型: ${model} 图生图功能 ${imageCount}张图片 ${resolutionResult.width}x${resolutionResult.height} 精细度: ${sampleStrength}`);
 
   // 获取积分
   try {
@@ -137,10 +111,9 @@ export async function generateImageComposition(
 
   // 使用 payload-builder 构建 core_param
   const coreParam = buildCoreParam({
-    userModel,
+    userModel: _model,
     model,
     prompt,
-    negativePrompt,
     imageCount,
     sampleStrength,
     resolution: resolutionResult,
@@ -159,7 +132,7 @@ export async function generateImageComposition(
 
   // 使用 payload-builder 构建 metrics_extra
   const metricsExtra = buildMetricsExtra({
-    userModel,
+    userModel: _model,
     regionInfo,
     submitId,
     scene: "ImageBasicGenerate",
@@ -212,8 +185,7 @@ export async function generateImageComposition(
   const poller = new SmartPoller({
     maxPollCount: 900,
     expectedItemCount: 1,
-    type: 'image',
-    timeoutSeconds: 900 // 15 分钟超时
+    type: 'image'
   });
 
   const { result: pollingResult, data: finalTaskInfo } = await poller.poll(async () => {
@@ -291,10 +263,10 @@ export async function generateImages(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const { model, userModel } = getModel(_model, regionInfo.isInternational);
-  logger.info(`使用模型: ${userModel} 映射模型: ${model} 分辨率: ${resolution} 比例: ${ratio} 精细度: ${sampleStrength} 智能比例: ${intelligentRatio}`);
+  const model = getModel(_model, regionInfo);
+  logger.info(`使用模型: ${_model} 映射模型: ${model} 分辨率: ${resolution} 比例: ${ratio} 精细度: ${sampleStrength} 智能比例: ${intelligentRatio}`);
 
-  return await generateImagesInternal(userModel, prompt, { ratio, resolution, sampleStrength, negativePrompt, intelligentRatio }, refreshToken);
+  return await generateImagesInternal(_model, prompt, { ratio, resolution, sampleStrength, negativePrompt, intelligentRatio }, refreshToken);
 }
 
 /**
@@ -319,11 +291,10 @@ async function generateImagesInternal(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const { model, userModel } = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
-  const resolutionResult = resolveResolution(userModel, regionInfo, resolution, ratio);
-  logResolutionInfo(userModel, resolutionResult, regionInfo);
+  const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);
 
   // 获取积分
   const { totalCredit, giftCredit, purchaseCredit, vipCredit } = await getCredit(refreshToken);
@@ -332,8 +303,8 @@ async function generateImagesInternal(
 
   logger.info(`当前积分状态: 总计=${totalCredit}, 赠送=${giftCredit}, 购买=${purchaseCredit}, VIP=${vipCredit}`);
 
-  // 检查是否为多图生成模式 (jimeng-4.0/jimeng-4.1/jimeng-4.5 支持)
-  const isJimeng4xMultiImage = ['jimeng-4.0', 'jimeng-4.1', 'jimeng-4.5'].includes(userModel) && (
+  // 检查是否为多图生成模式 (jimeng-4.0/jimeng-4.1 支持)
+  const isJimeng4xMultiImage = ['jimeng-4.0', 'jimeng-4.1'].includes(_model) && (
     prompt.includes("连续") ||
     prompt.includes("绘本") ||
     prompt.includes("故事") ||
@@ -341,7 +312,7 @@ async function generateImagesInternal(
   );
 
   if (isJimeng4xMultiImage) {
-    return await generateJimeng4xMultiImages(userModel, prompt, { ratio, resolution, sampleStrength, negativePrompt, intelligentRatio }, refreshToken);
+    return await generateJimeng4xMultiImages(_model, prompt, { ratio, resolution, sampleStrength, negativePrompt, intelligentRatio }, refreshToken);
   }
 
   const componentId = util.uuid();
@@ -349,7 +320,7 @@ async function generateImagesInternal(
 
   // 使用 payload-builder 构建 core_param
   const coreParam = buildCoreParam({
-    userModel,
+    userModel: _model,
     model,
     prompt,
     negativePrompt,
@@ -362,7 +333,7 @@ async function generateImagesInternal(
 
   // 使用 payload-builder 构建 metrics_extra
   const metricsExtra = buildMetricsExtra({
-    userModel,
+    userModel: _model,
     regionInfo,
     submitId,
     scene: "ImageBasicGenerate",
@@ -393,7 +364,7 @@ async function generateImagesInternal(
     { data: requestData }
   );
 
-  const historyId = aigc_data?.history_record_id;
+  const historyId = aigc_data.history_record_id;
   if (!historyId)
     throw new APIException(EX.API_IMAGE_GENERATION_FAILED, "记录ID不存在");
 
@@ -401,8 +372,7 @@ async function generateImagesInternal(
   const poller = new SmartPoller({
     maxPollCount: 900,
     expectedItemCount: 4,
-    type: 'image',
-    timeoutSeconds: 900 // 15 分钟超时
+    type: 'image'
   });
 
   const { result: pollingResult, data: finalTaskInfo } = await poller.poll(async () => {
@@ -462,7 +432,7 @@ async function generateImagesInternal(
 }
 
 /**
- * jimeng-4.0/jimeng-4.1/jimeng-4.5 多图生成
+ * jimeng-4.0/jimeng-4.1 多图生成
  */
 async function generateJimeng4xMultiImages(
   _model: string,
@@ -483,10 +453,10 @@ async function generateJimeng4xMultiImages(
   refreshToken: string
 ) {
   const regionInfo = parseRegionFromToken(refreshToken);
-  const { model, userModel } = getModel(_model, regionInfo.isInternational);
+  const model = getModel(_model, regionInfo);
 
   // 使用 payload-builder 处理分辨率
-  const resolutionResult = resolveResolution(userModel, regionInfo, resolution, ratio);
+  const resolutionResult = resolveResolution(_model, regionInfo, resolution, ratio);
 
   const targetImageCount = prompt.match(/(\d+)张/) ? parseInt(prompt.match(/(\d+)张/)[1]) : 4;
 
@@ -497,7 +467,7 @@ async function generateJimeng4xMultiImages(
 
   // 使用 payload-builder 构建 core_param
   const coreParam = buildCoreParam({
-    userModel,
+    userModel: _model,
     model,
     prompt,
     negativePrompt,
@@ -510,7 +480,7 @@ async function generateJimeng4xMultiImages(
 
   // 使用 payload-builder 构建 metrics_extra (多图模式)
   const metricsExtra = buildMetricsExtra({
-    userModel,
+    userModel: _model,
     regionInfo,
     submitId,
     scene: "ImageMultiGenerate",
@@ -552,8 +522,7 @@ async function generateJimeng4xMultiImages(
   const poller = new SmartPoller({
     maxPollCount: 600,
     expectedItemCount: targetImageCount,
-    type: 'image',
-    timeoutSeconds: 900 // 15 分钟超时
+    type: 'image'
   });
 
   const { result: pollingResult, data: finalTaskInfo } = await poller.poll(async () => {

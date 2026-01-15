@@ -1,53 +1,32 @@
 import _ from "lodash";
 import fs from "fs-extra";
-import axios from "axios";
 
 import APIException from "@/lib/exceptions/APIException.ts";
-
 import EX from "@/api/consts/exceptions.ts";
 import util from "@/lib/util.ts";
 import { getCredit, receiveCredit, request, parseRegionFromToken, getAssistantId, RegionInfo } from "./core.ts";
 import logger from "@/lib/logger.ts";
 import { SmartPoller, PollingStatus } from "@/lib/smart-poller.ts";
-import { DEFAULT_ASSISTANT_ID_CN, DEFAULT_ASSISTANT_ID_US, DEFAULT_ASSISTANT_ID_HK, DEFAULT_ASSISTANT_ID_JP, DEFAULT_ASSISTANT_ID_SG, DEFAULT_VIDEO_MODEL, DRAFT_VERSION, VIDEO_MODEL_MAP, VIDEO_MODEL_MAP_US, VIDEO_MODEL_MAP_ASIA } from "@/api/consts/common.ts";
+import { DEFAULT_ASSISTANT_ID_CN, DEFAULT_ASSISTANT_ID_US, DEFAULT_ASSISTANT_ID_HK, DEFAULT_ASSISTANT_ID_JP, DEFAULT_ASSISTANT_ID_SG, DEFAULT_VIDEO_MODEL, DRAFT_VERSION } from "@/api/consts/common.ts";
 import { uploadImageBuffer } from "@/lib/image-uploader.ts";
 import { extractVideoUrl } from "@/lib/image-utils.ts";
+import { modelConfigService } from "@/lib/model-config.ts";
 
 export const DEFAULT_MODEL = DEFAULT_VIDEO_MODEL;
 
-export function getModel(model: string, regionInfo: RegionInfo) {
-  // 根据站点选择不同的模型映射
-  let modelMap: Record<string, string>;
-  if (regionInfo.isUS) {
-    modelMap = VIDEO_MODEL_MAP_US;
-  } else if (regionInfo.isHK || regionInfo.isJP || regionInfo.isSG) {
-    modelMap = VIDEO_MODEL_MAP_ASIA;
-  } else {
-    modelMap = VIDEO_MODEL_MAP;
+export function getModel(model: string, regionInfo: RegionInfo): string {
+  // 先尝试从动态配置获取
+  const modelReqKey = modelConfigService.getVideoModelReqKey(model, regionInfo);
+  if (modelReqKey) {
+    return modelReqKey;
   }
-  return modelMap[model] || modelMap[DEFAULT_MODEL] || VIDEO_MODEL_MAP[DEFAULT_MODEL];
-}
-
-function getVideoBenefitType(model: string): string {
-  // veo3.1 模型 (需先于 veo3 检查)
-  if (model.includes("veo3.1")) {
-    return "generate_video_veo3.1";
+  // 如果找不到，尝试默认模型
+  const defaultModelReqKey = modelConfigService.getVideoModelReqKey(DEFAULT_MODEL, regionInfo);
+  if (defaultModelReqKey) {
+    return defaultModelReqKey;
   }
-  // veo3 模型
-  if (model.includes("veo3")) {
-    return "generate_video_veo3";
-  }
-  // sora2 模型
-  if (model.includes("sora2")) {
-    return "generate_video_sora2";
-  }
-  if (model.includes("3.5_pro")) {
-    return "dreamina_video_seedance_15_pro";
-  }
-  if (model.includes("3.5")) {
-    return "dreamina_video_seedance_15";
-  }
-  return "basic_video_operation_vgfm_v_three";
+  // 最后回退：直接返回输入的 model（可能已经是 model_req_key）
+  return model;
 }
 
 // 处理本地上传的文件
@@ -66,13 +45,11 @@ async function uploadImageFromFile(file: any, refreshToken: string, regionInfo: 
 async function uploadImageFromUrl(imageUrl: string, refreshToken: string, regionInfo: RegionInfo): Promise<string> {
   try {
     logger.info(`开始从URL下载并上传视频图片: ${imageUrl}`);
-    const imageResponse = await axios.get(imageUrl, {
-      responseType: 'arraybuffer',
-    });
-    if (imageResponse.status < 200 || imageResponse.status >= 300) {
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) {
       throw new Error(`下载图片失败: ${imageResponse.status}`);
     }
-    const imageBuffer = imageResponse.data;
+    const imageBuffer = await imageResponse.arrayBuffer();
     return await uploadImageBuffer(imageBuffer, refreshToken, regionInfo);
   } catch (error: any) {
     logger.error(`从URL上传视频图片失败: ${error.message}`);
@@ -115,50 +92,11 @@ export async function generateVideo(
   logger.info(`视频生成区域检测: isInternational=${isInternational}`);
 
   const model = getModel(_model, regionInfo);
-  const isVeo3 = model.includes("veo3");
-  const isSora2 = model.includes("sora2");
-  const is35Pro = model.includes("3.5_pro");
-  // 只有 video-3.0 和 video-3.0-fast 支持 resolution 参数（3.0-pro 和 3.5-pro 不支持）
-  const supportsResolution = (model.includes("vgfm_3.0") || model.includes("vgfm_3.0_fast")) && !model.includes("_pro");
 
-  // 将秒转换为毫秒
-  // veo3 模型固定 8 秒
-  // sora2 模型支持 4秒、8秒、12秒，默认4秒
-  // 3.5-pro 模型支持 5秒、10秒、12秒，默认5秒
-  // 其他模型支持 5秒、10秒，默认5秒
-  let durationMs: number;
-  let actualDuration: number;
-  if (isVeo3) {
-    durationMs = 8000;
-    actualDuration = 8;
-  } else if (isSora2) {
-    if (duration === 12) {
-      durationMs = 12000;
-      actualDuration = 12;
-    } else if (duration === 8) {
-      durationMs = 8000;
-      actualDuration = 8;
-    } else {
-      durationMs = 4000;
-      actualDuration = 4;
-    }
-  } else if (is35Pro) {
-    if (duration === 12) {
-      durationMs = 12000;
-      actualDuration = 12;
-    } else if (duration === 10) {
-      durationMs = 10000;
-      actualDuration = 10;
-    } else {
-      durationMs = 5000;
-      actualDuration = 5;
-    }
-  } else {
-    durationMs = duration === 10 ? 10000 : 5000;
-    actualDuration = duration === 10 ? 10 : 5;
-  }
+  // 将秒转换为毫秒，只支持5秒和10秒
+  const durationMs = duration === 10 ? 10000 : 5000;
 
-  logger.info(`使用模型: ${_model} 映射模型: ${model} 比例: ${ratio} 分辨率: ${supportsResolution ? resolution : '不支持'} 时长: ${actualDuration}s`);
+  logger.info(`使用模型: ${_model} 映射模型: ${model} 比例: ${ratio} 分辨率: ${resolution} 时长: ${duration}s`);
 
   // 检查积分
   const { totalCredit } = await getCredit(refreshToken);
@@ -269,28 +207,13 @@ export async function generateVideo(
   // 通过 first_frame_image 和 end_frame_image 是否为 undefined 来区分模式
   const functionMode = "first_last_frames";
 
-  const sceneOption = {
-    type: "video",
-    scene: "BasicVideoGenerateButton",
-    ...(supportsResolution ? { resolution: resolution } : {}),
-    modelReqKey: model,
-    videoDuration: actualDuration,
-    reportParams: {
-      enterSource: "generate",
-      vipSource: "generate",
-      extraVipFunctionKey: supportsResolution ? `${model}-${resolution}` : model,
-      useVipFunctionDetailsReporterHoc: true,
-    },
-  };
-
   const metricsExtra = JSON.stringify({
-    promptSource: "custom",
-    isDefaultSeed: 1,
-    originSubmitId: originSubmitId,
-    isRegenerate: false,
-    enterFrom: "click",
-    functionMode: functionMode,
-    sceneOptions: JSON.stringify([sceneOption]),
+    "promptSource": "custom",
+    "isDefaultSeed": 1,
+    "originSubmitId": originSubmitId,
+    "isRegenerate": false,
+    "enterFrom": "click",
+    "functionMode": functionMode
   });
 
   // 当有图片输入时，ratio参数会被图片的实际比例覆盖
@@ -300,7 +223,10 @@ export async function generateVideo(
   }
 
   logger.info(`视频生成模式: ${uploadIDs.length}张图片 (首帧: ${!!first_frame_image}, 尾帧: ${!!end_frame_image}), resolution: ${resolution}`);
-  
+
+  // 获取首尾帧视频时使用的默认模型
+  const rootModel = end_frame_image ? getModel('video-3.0', regionInfo) : model;
+
   // 构建请求参数
   const { aigc_data } = await request(
     "post",
@@ -314,15 +240,15 @@ export async function generateVideo(
       },
       data: {
         "extend": {
-          "root_model": model,
+          "root_model": rootModel,
           "m_video_commerce_info": {
-            benefit_type: getVideoBenefitType(model),
+            benefit_type: "basic_video_operation_vgfm_v_three",
             resource_id: "generate_video",
             resource_id_type: "str",
             resource_sub_type: "aigc"
           },
           "m_video_commerce_info_list": [{
-            benefit_type: getVideoBenefitType(model),
+            benefit_type: "basic_video_operation_vgfm_v_three",
             resource_id: "generate_video",
             resource_id_type: "str",
             resource_sub_type: "aigc"
@@ -369,7 +295,7 @@ export async function generateVideo(
                     "video_mode": 2,
                     "fps": 24,
                     "duration_ms": durationMs,
-                    ...(supportsResolution ? { "resolution": resolution } : {}),
+                    "resolution": resolution,
                     "first_frame_image": first_frame_image,
                     "end_frame_image": end_frame_image,
                     "idip_meta_list": []
@@ -451,17 +377,9 @@ export async function generateVideo(
     }
 
     // 检查响应中是否有该 history_id 的数据
-    // 由于 API 存在最终一致性，早期轮询可能暂时获取不到记录，返回处理中状态继续轮询
     if (!result[historyId]) {
-      logger.warn(`API未返回历史记录 (轮询第${pollAttempts}次)，historyId: ${historyId}，继续等待...`);
-      return {
-        status: {
-          status: 20, // PROCESSING
-          itemCount: 0,
-          historyId
-        } as PollingStatus,
-        data: { status: 20, item_list: [] }
-      };
+      logger.warn(`API未返回历史记录，historyId: ${historyId}`);
+      throw new APIException(EX.API_IMAGE_GENERATION_FAILED, "记录不存在");
     }
 
     const historyData = result[historyId];

@@ -15,6 +15,7 @@
 - 📊 **详细日志**: 结构化日志记录，便于调试
 - 🐳 **Docker支持**: 容器化部署，开箱即用
 - ⚙️ **日志级别控制**: 可通过配置文件动态调整日志输出级别
+- 📋 **动态模型配置**: 模型配置从本地JSON文件加载，支持脚本手动更新或API刷新
 
 ## ⚠ 风险警告
 
@@ -34,7 +35,7 @@ curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "prompt": "美丽的少女，胶片感",
     "ratio": "4:3",
     "resolution": "2k"
@@ -58,9 +59,9 @@ curl -X POST http://localhost:5100/v1/images/generations \
 >
 > **注意2**: 国内站和国际站现已同时支持*文生图*和*图生图*，国际站添加nanobanana和nanobananapro模型。
 >
-> **注意3**: 国际站使用nanobanana模型时的分辨率规则:
-> - **美国站 (us-)**: 生成的图像固定为 **1024x1024** 和 **2k** 清晰度，忽略用户传入的 ratio 和 resolution 参数
-> - **香港/日本/新加坡站 (hk-/jp-/sg-)**: 强制使用 **1k** 清晰度，但支持自定义 ratio 参数（如 16:9、4:3 等）
+> **注意3**: 国际站 nanobanana 模型的分辨率规则（根据配置文件动态加载）:
+> - **Nano Banana**: 仅支持 **1k** 分辨率，支持自定义 ratio（如 1:1、16:9、4:3 等）
+> - **Nano Banana Pro**: 支持 **2k** 和 **4k** 分辨率，支持自定义 ratio
 
 ![](https://github.com/iptag/jimeng-api/blob/main/get_sessionid.png)
 
@@ -218,16 +219,14 @@ Claude: [自动调用 skill,生成图片并保存到 /pic 目录]
 **POST** `/v1/images/generations`
 
 **请求参数**:
-- `model` (string, 可选): 使用的模型名称。国内站和国际站（US/HK/JP/SG）均默认 `jimeng-4.5`。
+- `model` (string): 使用的模型名称
 - `prompt` (string): 图像描述文本
 - `ratio` (string, 可选): 图像比例，默认为 `"1:1"`。支持的比例: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`。**注意**: 当 `intelligent_ratio` 为 `true` 时，此参数将被忽略，系统会根据提示词自动推断最佳比例。
 - `resolution` (string, 可选): 分辨率级别，默认为 `"2k"`。支持的分辨率: `1k`, `2k`, `4k`。
-- `intelligent_ratio` (boolean, 可选): 是否启用智能比例，默认为 `false`。**⚠️ 此参数仅对 jimeng-4.0/jimeng-4.1/jimeng-4.5 模型有效，其他模型将忽略此参数。** 启用后系统会根据提示词自动推断最佳图像比例（例如："竖屏" → 9:16，"横屏" → 16:9）。
+- `intelligent_ratio` (boolean, 可选): 是否启用智能比例，默认为 `false`。**⚠️ 此参数仅对 jimeng-4.0/jimeng-4.1 模型有效，其他模型将忽略此参数。** 启用后系统会根据提示词自动推断最佳图像比例（例如："竖屏" → 9:16，"横屏" → 16:9）。
 - `negative_prompt` (string, 可选): 负面提示词
 - `sample_strength` (number, 可选): 采样强度 (0.0-1.0)
 - `response_format` (string, 可选): 响应格式 ("url" 或 "b64_json")
-
-> **⏱️ 超时设置**: 图像生成最长等待 30 分钟。高峰期可能需要排队，请耐心等待。
 
 ```bash
 # 默认参数（ratio: "1:1", resolution: "2k"）
@@ -235,7 +234,7 @@ curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "prompt": "一只可爱的小猫咪"
   }'
 
@@ -244,7 +243,7 @@ curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "prompt": "壮丽的山水风景，超高分辨率",
     "ratio": "16:9",
     "resolution": "4k"
@@ -255,23 +254,21 @@ curl -X POST http://localhost:5100/v1/images/generations \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "prompt": "奔跑的狮子，竖屏",
     "resolution": "2k",
     "intelligent_ratio": true
   }'
 ```
 
-**支持的模型**:
-- `nanobananapro`: 仅国际站支持，支持`ratio` 和`resolution`参数
-- `nanobanana`: 仅国际站支持
-- `jimeng-4.5`: 国内、国际站均支持，支持 2k/4k 全部 ratio 及 intelligent_ratio **（所有站点默认模型）**
-- `jimeng-4.1`: 国内、国际站均支持，支持 2k/4k 全部 ratio 及 intelligent_ratio
-- `jimeng-4.0`: 国内、国际站均支持
-- `jimeng-3.1`: 仅国内站支持
-- `jimeng-3.0`: 国内、国际站均支持
-- `jimeng-2.1`: 仅国内站支持
-- `jimeng-xl-pro`
+**支持的模型**（从配置文件动态加载，使用 `/v1/models` 查询最新列表）:
+- `jimeng-4.1`: 国内站和国际站均支持，支持 2k/4k 分辨率
+- `jimeng-4.0`: 国内站和国际站均支持，支持 2k/4k 分辨率
+- `jimeng-3.1`: 仅国内站支持（国际站为 `jimeng-3.1-intl`），支持 1k/2k 分辨率
+- `jimeng-3.0`: 国内站和国际站均支持，支持 1k/2k 分辨率
+- `nanobananapro`: 仅国际站支持，支持 2k/4k 分辨率
+- `nanobanana`: 仅国际站支持，仅支持 1k 分辨率
+- `jimeng-2.0-pro`: 仅国际站支持，仅支持 1k 分辨率
 
 
 **支持的比例及对应分辨率** ：
@@ -316,17 +313,17 @@ curl -X POST http://localhost:5100/v1/images/generations \
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer us-YOUR_SESSION_ID" \
   -F "prompt=A cute cat, anime style" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "images=@/path/to/your/local/cat.jpg"
 ```
 
 **请求参数**:
-- `model` (string, 可选): 使用的模型名称。国内站和国际站（US/HK/JP/SG）均默认 `jimeng-4.5`。
+- `model` (string): 使用的模型名称
 - `prompt` (string): 图像描述文本，用于指导生成方向
 - `images` (array): 输入图片数组
 - `ratio` (string, 可选): 图像比例，默认为 `"1:1"`。支持的比例: `1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `3:2`, `2:3`, `21:9`。
 - `resolution` (string, 可选): 分辨率级别，默认为 `"2k"`。支持的分辨率: `1k`, `2k`, `4k`。
-- `intelligent_ratio` (boolean, 可选): 是否启用智能比例，默认为 `false`。**⚠️ 此参数仅对 jimeng-4.0/jimeng-4.1/jimeng-4.5 模型有效，其他模型将忽略此参数。** 启用后系统会根据提示词和输入图片自动调整输出比例。
+- `intelligent_ratio` (boolean, 可选): 是否启用智能比例，默认为 `false`。**⚠️ 此参数仅对 jimeng-4.0/jimeng-4.1 模型有效，其他模型将忽略此参数。** 启用后系统会根据提示词和输入图片自动调整输出比例。
 - `negative_prompt` (string, 可选): 负面提示词
 - `sample_strength` (number, 可选): 采样强度 (0.0-1.0)
 - `response_format` (string, 可选): 响应格式 ("url"(默认) 或 "b64_json")
@@ -334,7 +331,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 **使用限制**:
 - 输入图片数量: 1-10张
 - 支持的图片格式: JPG, PNG, WebP等常见格式
-- 图片大小限制: 建议单张图片不超过100MB
+- 图片大小限制: 建议单张图片不超过10MB
 - 生成时间: 通常30秒-5分钟，复杂合成可能需要更长时间
 
 **使用示例**:
@@ -345,7 +342,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "prompt": "将这张照片转换为油画风格，色彩鲜艳，笔触明显",
     "images": ["https://example.com/photo.jpg"],
     "ratio": "1:1",
@@ -357,7 +354,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -F "prompt=一只可爱的猫，动漫风格" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "ratio=1:1" \
   -F "resolution=1k" \
   -F "images=@/path/to/your/local/cat.jpg"
@@ -366,7 +363,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 curl -X POST http://localhost:5100/v1/images/compositions \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -F "prompt=融合这两张图片" \
-  -F "model=jimeng-4.5" \
+  -F "model=jimeng-4.0" \
   -F "images=@/path/to/your/image1.jpg" \
   -F "images=@/path/to/your/image2.png"
 ```
@@ -388,7 +385,7 @@ curl -X POST http://localhost:5100/v1/images/compositions \
 #### ❓ **常见问题与解决方案**
 
 **Q: 图片上传失败怎么办？**
-A: 检查图片URL是否可访问，确保图片格式正确，文件大小不超过100MB。
+A: 检查图片URL是否可访问，确保图片格式正确，文件大小不超过10MB。
 
 **Q: 生成时间过长怎么办？**
 A: 复杂的多图合成需要更长时间，建议耐心等待。如果超过10分钟仍未完成，可以重新提交请求。
@@ -425,12 +422,8 @@ A: 可以。现在支持直接上传本地文件。请参考上方的“本地�
 - `model` (string): 使用的视频模型名称。
 - `prompt` (string): 视频内容的文本描述。
 - `ratio` (string, 可选): 视频比例，默认为 `"1:1"`。支持的比例：`1:1`, `4:3`, `3:4`, `16:9`, `9:16`, `21:9`。**注意**：在图生视频模式下（有图片输入时），此参数将被忽略，视频比例由输入图片的实际比例决定。
-- `resolution` (string, 可选): 视频分辨率，默认为 `"720p"`。支持的分辨率：`720p`, `1080p`。**注意**：仅 `jimeng-video-3.0` 和 `jimeng-video-3.0-fast` 支持此参数，其他模型会忽略。
-- `duration` (number, 可选): 视频时长（秒）。不同模型支持的值：
-  - `jimeng-video-veo3` / `jimeng-video-veo3.1`: `8`（固定）
-  - `jimeng-video-sora2`: `4`（默认）、`8`、`12`
-  - `jimeng-video-3.5-pro`: `5`（默认）、`10`、`12`
-  - 其他模型: `5`（默认）、`10`
+- `resolution` (string, 可选): 视频分辨率，默认为 `"720p"`。支持的分辨率：`720p`, `1080p`。
+- `duration` (number, 可选): 视频时长（秒），默认为 `5`。支持的值：`5`（5秒），`10`（10秒）。
 - `file_paths` (array, 可选): 一个包含图片URL的数组，用于指定视频的**首帧**（数组第1个元素）和**尾帧**（数组第2个元素）。
 - `[file]` (file, 可选): 通过 `multipart/form-data` 方式上传的本地图片文件（最多2个），用于指定视频的**首帧**和**尾帧**。字段名可以任意，例如 `image1`。
 - `response_format` (string, 可选): 响应格式，支持 `url` (默认) 或 `b64_json`。
@@ -442,17 +435,20 @@ A: 可以。现在支持直接上传本地文件。请参考上方的“本地�
 > - **重要**：一旦提供图片输入（图生视频或首尾帧视频），`ratio` 参数将被忽略，视频比例将由输入图片的实际比例决定。`resolution` 参数仍然有效。
 
 **支持的视频模型**:
-- `jimeng-video-3.5-pro` - 专业版v3.5，国内/国际站均支持 **（默认）**
-- `jimeng-video-veo3` - Veo3模型，仅亚洲国际站 (HK/JP/SG) 支持，固定8秒时长
-- `jimeng-video-veo3.1` - Veo3.1模型，仅亚洲国际站 (HK/JP/SG) 支持，固定8秒时长
-- `jimeng-video-sora2` - Sora2模型，仅亚洲国际站 (HK/JP/SG) 支持
-- `jimeng-video-3.0-pro` - 专业版，国内站和亚洲国际站 (HK/JP/SG) 支持
-- `jimeng-video-3.0` - 标准版，国内/国际站均支持
-- `jimeng-video-3.0-fast` - 极速版，国内站和亚洲国际站 (HK/JP/SG) 支持
-- `jimeng-video-2.0-pro` - 专业版v2，国内站和亚洲国际站 (HK/JP/SG) 支持
-- `jimeng-video-2.0` - 标准版v2，国内站和亚洲国际站 (HK/JP/SG) 支持
 
-> **注意**: 美国站仅支持 `jimeng-video-3.5-pro` 和 `jimeng-video-3.0` 模型。
+**国内站（视频生成）**:
+- `video-3.0-pro` - 视频 3.0 Pro（效果最佳，画质超清）
+- `video-3.0-fast` - 视频 3.0 Fast（Pro级表现，加量不加价）
+- `video-3.0` - 视频 3.0（精准响应，支持多镜头和运镜）
+
+**国际站（视频生成）**:
+- `video-3.0-pro` - Video 3.0 Pro
+- `video-3.0-fast` - Video 3.0 Fast
+- `video-3.0` - Video 3.0
+- `veo-3` - Veo 3 模型
+- `video-s2.0-pro` - Video S2.0 Pro
+
+> **注意**: 视频模型的可用性因站点而异。使用 `/v1/models` 或 `/v1/models/video` 接口查询您站点可用的模型。
 
 **使用示例**:
 
@@ -511,7 +507,7 @@ curl -X POST http://localhost:5100/v1/chat/completions \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_SESSION_ID" \
   -d '{
-    "model": "jimeng-4.5",
+    "model": "jimeng-4.0",
     "messages": [
       {
         "role": "user",
@@ -519,61 +515,6 @@ curl -X POST http://localhost:5100/v1/chat/completions \
       }
     ]
   }'
-```
-
-### Token API
-
-#### 检查Token状态
-
-**POST** `/token/check`
-
-检查token是否有效。
-
-**请求参数**:
-- `token` (string): 要检查的session token
-
-#### 获取积分信息
-
-**POST** `/token/points`
-
-获取一个或多个token的当前积分余额。
-
-**请求头**:
-- `Authorization`: Bearer token，多个token用逗号分隔
-
-#### 领取每日积分
-
-**POST** `/token/receive`
-
-手动触发每日积分领取（签到）。无论领取是否成功，都会返回最新的积分信息。
-
-**请求头**:
-- `Authorization`: Bearer token，多个token用逗号分隔
-
-**响应格式**:
-```json
-[
-  {
-    "token": "your_token",
-    "credits": {
-      "giftCredit": 10,
-      "purchaseCredit": 0,
-      "vipCredit": 0,
-      "totalCredit": 10
-    }
-  }
-]
-```
-
-**使用示例**:
-```bash
-# 单个token
-curl -X POST http://localhost:5100/token/receive \
-  -H "Authorization: Bearer YOUR_SESSION_ID"
-
-# 多个token批量签到
-curl -X POST http://localhost:5100/token/receive \
-  -H "Authorization: Bearer TOKEN1,TOKEN2,TOKEN3"
 ```
 
 ## 🔍 API响应格式
@@ -599,7 +540,7 @@ curl -X POST http://localhost:5100/token/receive \
   "id": "chatcmpl-123",
   "object": "chat.completion",
   "created": 1759058768,
-  "model": "jimeng-4.5",
+  "model": "jimeng-4.0",
   "choices": [
     {
       "index": 0,
@@ -620,11 +561,97 @@ curl -X POST http://localhost:5100/token/receive \
 
 ### 流式响应 (SSE)
 ```
-data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.5","choices":[{"index":0,"delta":{"role":"assistant","content":"🎨 图像生成中，请稍候..."},"finish_reason":null}]}
+data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.0","choices":[{"index":0,"delta":{"role":"assistant","content":"🎨 图像生成中，请稍候..."},"finish_reason":null}]}
 
-data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.5","choices":[{"index":1,"delta":{"role":"assistant","content":"![image](https://example.com/image.jpg)"},"finish_reason":"stop"}]}
+data: {"id":"chatcmpl-123","object":"chat.completion.chunk","created":1759058768,"model":"jimeng-4.0","choices":[{"index":1,"delta":{"role":"assistant","content":"![image](https://example.com/image.jpg)"},"finish_reason":"stop"}]}
 
 data: [DONE]
+```
+
+## 📋 模型配置管理
+
+模型配置（图片模型和视频模型）存储在本地 `configs/model-configs.json` 文件中，启动时从本地加载，无需网络请求。
+
+### 更新模型配置
+
+**方法一：使用 npm 脚本（推荐）**
+```bash
+npm run update-configs
+```
+
+**方法二：API 刷新（运行时）**
+```bash
+curl -X POST http://localhost:5100/v1/models/config/refresh
+```
+
+### 查询可用模型
+
+**获取所有模型（图片 + 视频）**:
+```bash
+curl http://localhost:5100/v1/models
+```
+
+**按站点获取图片模型**:
+```bash
+curl http://localhost:5100/v1/models/image
+```
+
+**获取视频模型详情**:
+```bash
+curl http://localhost:5100/v1/models/video
+```
+
+**检查配置状态**:
+```bash
+curl http://localhost:5100/v1/models/config/status
+```
+
+### 响应示例
+
+**GET /v1/models**:
+```json
+{
+  "data": [
+    {
+      "id": "jimeng-4.1",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "image",
+      "supported_regions": {
+        "china": true,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    },
+    {
+      "id": "video-3.0-pro",
+      "object": "model",
+      "owned_by": "jimeng-api",
+      "type": "video",
+      "supported_regions": {
+        "china": false,
+        "US": true,
+        "HK": true,
+        "JP": true,
+        "SG": true
+      }
+    }
+  ]
+}
+```
+
+**GET /v1/models/config/status**:
+```json
+{
+  "sites": {
+    "china": { "imageModelCount": 5, "videoModelCount": 2, "lastUpdated": "2025-12-06T..." },
+    "US": { "imageModelCount": 7, "videoModelCount": 5, "lastUpdated": "2025-12-06T..." },
+    ...
+  },
+  "configFilePath": "..."
+}
 ```
 
 ## 🏗️ 项目架构
@@ -639,6 +666,8 @@ jimeng-api/
 │   │   │   ├── videos.ts        # 视频生成逻辑
 │   │   │   └── chat.ts          # 聊天接口逻辑
 │   │   ├── routes/              # 路由定义
+│   │   │   ├── index.ts         # 主路由
+│   │   │   └── models.ts        # 模型配置路由
 │   │   └── consts/              # 常量定义
 │   ├── lib/                     # 核心库
 │   │   ├── configs/            # 配置加载
@@ -652,10 +681,14 @@ jimeng-api/
 │   │   ├── logger.ts           # 日志记录器
 │   │   ├── error-handler.ts    # 统一错误处理
 │   │   ├── smart-poller.ts     # 智能轮询器
+│   │   ├── model-config.ts     # 模型配置服务
 │   │   └── aws-signature.ts    # AWS签名
 │   ├── daemon.ts               # 守护进程
 │   └── index.ts               # 入口文件
 ├── configs/                    # 配置文件
+│   └── model-configs.json     # 模型配置（图片 + 视频）
+├── scripts/
+│   └── update-model-configs.ts # 从API更新模型配置的脚本
 ├── Dockerfile                 # Docker配置
 └── package.json              # 项目配置
 ```
@@ -711,9 +744,9 @@ export const RETRY_CONFIG = {
    - 检查Sessionid格式是否正确
 
 3. **生成超时**
-   - 图像生成：最长等待 15 分钟（高峰期可能需要排队）
-   - 视频生成：最长等待 20 分钟
-   - 系统会自动处理超时情况，超时后会返回错误信息
+   - 图像生成：通常1-3分钟
+   - 视频生成：通常3-15分钟
+   - 系统会自动处理超时情况
 
 4. **积分不足**
    - 前往即梦/dreamina官网查看积分余额
